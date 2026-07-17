@@ -1,0 +1,17 @@
+* {
+    margin: 0;
+}
+
+/* temp css. remove this when people actually begin working */
+#root > div {
+    background-color: #f0f0f0;
+    height: 250px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#root>div:nth-child(odd) {
+    background-color: rgb(210, 210, 210);
+}
