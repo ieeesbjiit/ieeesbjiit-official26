@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 
-const PosterCard = ({ event, compact = false }) => {
+const PosterCard = ({ event = false }) => {
   return (
     <motion.div
-      className={`poster-card ${compact ? "compact" : "main"}`}
+      className={"poster-card"}
       style={{ "--accent": event.accent }}
       whileHover={{
-        scale: compact ? 0.96 : 1.02,
+        scale:1.02,
       }}
       transition={{
         type: "spring",
@@ -22,25 +22,18 @@ const PosterCard = ({ event, compact = false }) => {
           IEEE SB JIIT
         </span>
 
-        <h1 className={compact ? "compact-title" : ""}>
+        <h1>
           {event.title}
         </h1>
 
-        <p className={compact ? "compact-description" : ""}>
+        <p>
           {event.description}
         </p>
 
-        {!compact && (
-          <div className="poster-footer">
-
-            <span>
-              Explore Event
-            </span>
-
-            <div className="poster-line"></div>
-
-          </div>
-        )}
+        <div className="poster-footer">
+  <span>Explore Event</span>
+  <div className="poster-line"></div>
+</div>
 
       </div>
 

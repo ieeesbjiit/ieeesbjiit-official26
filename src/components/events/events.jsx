@@ -13,13 +13,15 @@ import PosterCard from "./PosterCard";
 
 const Events = () => {
   const [active, setActive] = useState(0);
-  const direction = 0;
+  const [direction, setDirection] = useState(1);
 
   const nextSlide = () => {
+    setDirection(1);
     setActive((prev) => (prev + 1) % events.length);
   };
 
   const prevSlide = () => {
+    setDirection(-1);
     setActive(
       (prev) =>
         (prev - 1 + events.length) %
@@ -68,7 +70,7 @@ const Events = () => {
 
         {/* LEFT POSTER */}
 
-        <motion.div
+        <motion.div 
           className="preview-card left-preview"
           layout
           transition={{
@@ -122,27 +124,27 @@ const Events = () => {
               initial={false}
             >
 
-              <motion.div
+              <motion.div custom={direction}
                 key={current.title}
                 className="center-poster"
-                initial={{
+                initial={(direction) => ({
+                  x: direction > 0 ? 250 : -250,
                   opacity: 0,
-                  scale: .90,
-                  y: 30,
-                }}
+                })}
+
                 animate={{
+                  x: 0,
                   opacity: 1,
-                  scale: 1,
-                  y: 0,
                 }}
-                exit={{
+
+                exit={(direction) => ({
+                  x: direction > 0 ? -250 : 250,
                   opacity: 0,
-                  scale: .90,
-                  y: -30,
-                }}
-                transition={{
-                  duration: .45,
-                }}
+                })}
+               transition={{
+                duration: 0.25,
+                ease: "easeOut",
+              }}
               >
 
                 <PosterCard
