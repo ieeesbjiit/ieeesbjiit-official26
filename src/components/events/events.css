@@ -1,0 +1,638 @@
+/* ===========================
+   EVENTS SECTION
+=========================== */
+
+.events-section {
+  min-height: 100vh;
+  background: #040812;
+  padding: 100px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.events-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top left,
+      rgba(0, 183, 255, 0.08),
+      transparent 45%),
+    radial-gradient(circle at bottom right,
+      rgba(37, 99, 235, 0.08),
+      transparent 45%);
+  pointer-events: none;
+}
+
+.events-heading {
+  text-align: center;
+  margin-bottom: 70px;
+  position: relative;
+  z-index: 2;
+}
+
+.events-heading h2 {
+  color: #fff;
+  font-size: 3.6rem;
+  font-weight: 800;
+  letter-spacing: 8px;
+}
+
+.events-heading p {
+  margin-top: 14px;
+  color: #a8b4c7;
+  font-size: 1rem;
+}
+
+/* ===========================
+   MAIN WRAPPER
+=========================== */
+
+.events-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 45px;
+  position: relative;
+}
+
+/* ===========================
+   SIDE PREVIEWS
+=========================== */
+
+.preview-card {
+  width: 290px;
+  flex-shrink: 0;
+  transition: .4s;
+}
+
+.left-preview {
+  transform: perspective(900px)
+    rotateY(18deg)
+    scale(.82);
+  opacity: .55;
+}
+
+.right-preview {
+  transform: perspective(900px)
+    rotateY(-18deg)
+    scale(.82);
+  opacity: .55;
+}
+
+/* ===========================
+   INSTAGRAM FRAME
+=========================== */
+
+.instagram-frame {
+
+  width: 420px;
+  height: 760px;
+
+  border-radius: 30px;
+
+  overflow: hidden;
+
+  position: relative;
+
+  background: #0b1220;
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  box-shadow:
+      0 25px 70px rgba(0,0,0,.45);
+
+  flex-shrink: 0;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+.frame-header {
+
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  width: 100%;
+
+  height: 72px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 0 20px;
+
+  z-index: 50;
+
+  background:
+      rgba(11,18,32,.92);
+
+  backdrop-filter: blur(12px);
+}
+
+.profile {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+.profile-pic {
+
+  width: 42px;
+  height: 42px;
+
+  border-radius: 50%;
+
+  background:
+      linear-gradient(
+      135deg,
+      #00B7FF,
+      #2563EB
+  );
+}
+
+.profile-info h4 {
+
+  color: white;
+
+  font-size: 15px;
+
+  margin: 0;
+}
+
+.profile-info span {
+
+  color: #8fa3bf;
+
+  font-size: 13px;
+}
+
+.menu {
+
+  color: white;
+
+  font-size: 20px;
+
+  cursor: pointer;
+}
+
+/* ===========================
+   POSTER WINDOW
+=========================== */
+
+.poster-window {
+
+  position: absolute;
+
+  top: 72px;
+
+  bottom: 70px;
+
+  left: 0;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+}
+
+/* ===========================
+   POSTER CARD
+=========================== */
+
+.poster-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 540px;
+
+  border-radius: 28px;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      #0d1728 0%,
+      #09111d 100%
+    );
+
+  border: 1px solid rgba(255,255,255,.06);
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.45);
+
+  isolation: isolate;
+}
+
+/* Glow */
+
+.poster-glow {
+
+  position: absolute;
+
+  width: 320px;
+  height: 320px;
+
+  background:
+    radial-gradient(
+      circle,
+      var(--accent),
+      transparent 70%
+    );
+
+  filter: blur(70px);
+
+  opacity: .22;
+
+  top: -80px;
+
+  right: -80px;
+
+  z-index: 0;
+}
+
+/* Content */
+
+.poster-inner {
+
+  position: relative;
+
+  z-index: 2;
+
+  height: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  text-align: center;
+
+  padding: 48px;
+}
+
+/* Small Label */
+
+.poster-tag {
+
+  display: inline-block;
+
+  padding: 8px 18px;
+
+  border-radius: 999px;
+
+  background:
+      rgba(255,255,255,.07);
+
+  color: var(--accent);
+
+  font-size: .78rem;
+
+  letter-spacing: 3px;
+
+  text-transform: uppercase;
+
+  margin-bottom: 28px;
+}
+
+/* Heading */
+
+.poster-inner h1 {
+
+  color: white;
+
+  font-size: 3rem;
+
+  font-weight: 800;
+
+  line-height: 1.1;
+
+  margin-bottom: 22px;
+}
+
+/* Description */
+
+.poster-inner p {
+
+  color: #b8c3d0;
+
+  line-height: 1.8;
+
+  font-size: 1rem;
+
+  max-width: 290px;
+}
+
+/* Footer */
+
+.poster-footer {
+
+  margin-top: auto;
+
+  width: 100%;
+}
+
+.poster-footer span {
+
+  display: block;
+
+  color: white;
+
+  font-weight: 600;
+
+  letter-spacing: 1px;
+
+  margin-bottom: 14px;
+}
+
+.poster-line {
+
+  width: 100%;
+
+  height: 3px;
+
+  border-radius: 999px;
+
+  background:
+      linear-gradient(
+      90deg,
+      var(--accent),
+      transparent
+  );
+}
+
+/* ===========================
+   COMPACT VERSION
+=========================== */
+
+.poster-card.compact {
+
+  min-height: 430px;
+}
+
+.poster-card.compact .poster-inner {
+
+  padding: 28px;
+}
+
+.poster-card.compact .poster-tag {
+
+  font-size: .68rem;
+
+  margin-bottom: 18px;
+}
+
+.compact-title {
+
+  font-size: 2rem !important;
+
+  margin-bottom: 14px !important;
+}
+
+.compact-description {
+
+  font-size: .88rem !important;
+
+  line-height: 1.7;
+}
+
+.poster-card.compact .poster-footer {
+
+  display: none;
+}
+
+/* ===========================
+   INSTAGRAM FOOTER
+=========================== */
+
+.frame-footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 70px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 22px;
+
+  background: rgba(11, 18, 32, 0.92);
+  backdrop-filter: blur(12px);
+
+  border-top: 1px solid rgba(255,255,255,.06);
+
+  z-index: 10;
+}
+
+.footer-icons {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  color: white;
+  font-size: 22px;
+}
+
+.frame-footer svg {
+  cursor: pointer;
+  transition: .25s ease;
+}
+
+.frame-footer svg:hover {
+  color: var(--accent);
+  transform: scale(1.15);
+}
+
+/* ===========================
+   NAVIGATION
+=========================== */
+
+.nav-btn {
+  width: 56px;
+  height: 56px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(255,255,255,.08);
+
+  color: white;
+
+  font-size: 24px;
+
+  cursor: pointer;
+
+  transition: .3s ease;
+
+  backdrop-filter: blur(10px);
+}
+
+.nav-btn:hover {
+  background: var(--accent);
+  color: #04111f;
+
+  transform: scale(1.08);
+}
+
+.left-btn {
+  margin-right: 10px;
+}
+
+.right-btn {
+  margin-left: 10px;
+}
+
+/* ===========================
+   DOTS
+=========================== */
+
+.dots {
+  margin-top: 45px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(255,255,255,.25);
+
+  cursor: pointer;
+
+  transition: .3s ease;
+}
+
+.active-dot {
+  width: 36px;
+
+  border-radius: 20px;
+
+  background: linear-gradient(
+    90deg,
+    #00B7FF,
+    #2563EB
+  );
+}
+
+/* ===========================
+   HOVER
+=========================== */
+
+.preview-card:hover {
+  opacity: .9;
+}
+
+.instagram-frame:hover {
+  transform: translateY(-4px);
+
+  transition: .35s ease;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 1200px) {
+
+  .events-wrapper {
+    gap: 25px;
+  }
+
+  .preview-card {
+    width: 240px;
+  }
+
+  .instagram-frame {
+    width: 380px;
+    height: 690px;
+  }
+
+}
+
+@media (max-width: 900px) {
+
+  .preview-card {
+    display: none;
+  }
+
+  .events-wrapper {
+    gap: 15px;
+  }
+
+  .instagram-frame {
+    width: 360px;
+    height: 660px;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .events-section {
+    padding: 70px 20px;
+  }
+
+  .events-heading h2 {
+    font-size: 2.4rem;
+    letter-spacing: 4px;
+  }
+
+  .events-heading p {
+    font-size: .9rem;
+  }
+
+  .instagram-frame {
+    width: 95%;
+    height: 620px;
+  }
+
+  .poster-inner {
+    padding: 28px;
+  }
+
+  .poster-inner h1 {
+    font-size: 2.2rem;
+  }
+
+  .poster-inner p {
+    font-size: .92rem;
+  }
+
+  .nav-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
+
+}
