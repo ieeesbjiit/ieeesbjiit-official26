@@ -10,8 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "ogl": "^1.0.11",
     "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "react-dom": "^19.2.7",
+    "three": "^0.185.1"
   },
   "devDependencies": {
     "@babel/core": "^7.29.7",
