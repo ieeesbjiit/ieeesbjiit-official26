@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import Background from "./comopnents/Background";
-import CarouselCard from "./comopnents/CarouselCard";
-import InfoPanel from "./comopnents/InfoPanel";
-import NavControls from "./comopnents/NavControls";
+import Background from "./components/Background";
+import CarouselCard from "./components/CarouselCard";
+import InfoPanel from "./components/InfoPanel";
+import NavControls from "./components/NavControls";
 
 const team = [
   {
