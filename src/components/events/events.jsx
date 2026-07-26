@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 import { AnimatePresence, motion } from "framer-motion";
 import {
   FaRegHeart,
+  FaHeart,
   FaRegComment,
   FaRegBookmark,
 } from "react-icons/fa";
@@ -10,10 +12,12 @@ import { FiSend } from "react-icons/fi";
 import "./events.css";
 import events from "./events";
 import PosterCard from "./PosterCard";
+import ieeeLogo from "../../assets/ieee-logo.png";
 
 const Events = () => {
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState(1);
+const [liked, setLiked] = useState(false);
 
   const nextSlide = () => {
     setDirection(1);
@@ -28,6 +32,13 @@ const Events = () => {
         events.length
     );
   };
+useEffect(() => {
+  const interval = setInterval(() => {
+    nextSlide();
+  }, 5000);
+
+  return () => clearInterval(interval);
+}, [active]);
 
   const previous =
     events[
@@ -97,7 +108,11 @@ const Events = () => {
 
             <div className="profile">
 
-              <div className="profile-pic"></div>
+              <img
+  src={ieeeLogo}
+  alt="IEEE SB JIIT"
+  className="profile-pic"
+/>
 
               <div className="profile-info">
 
@@ -163,7 +178,26 @@ const Events = () => {
 
             <div className="footer-icons">
 
-              <FaRegHeart />
+              {liked ? (
+  <FaHeart
+    onClick={() => setLiked(false)}
+    style={{
+      color: "#ff3040",
+      cursor: "pointer",
+      transition: "0.3s ease",
+      transform: "scale(1.15)"
+    }}
+  />
+) : (
+  <FaRegHeart
+    onClick={() => setLiked(true)}
+    style={{
+      color: "white",
+      cursor: "pointer",
+      transition: "0.3s ease"
+    }}
+  />
+)}
 
               <FaRegComment />
 
