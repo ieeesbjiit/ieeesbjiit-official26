@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./navbar.css";
-//import logo from "./ieeelogo.png"; // change path if logo is elsewhere
+import logo from "./ieee_white.png"; // change path if logo is elsewhere
 
 const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -11,7 +11,7 @@ const Navbar = () => {
 
                 {/* Replace this with logo later */}
                 <div className="ieee-logo">
-                    IEEE SB JIIT
+                    <img src={logo} alt="logo" />
                 </div>
 
                 <button
@@ -26,6 +26,8 @@ const Navbar = () => {
                 <ul className={`ieee-navbar-menu ${menuOpen ? "active" : ""}`}>
 
                     <li><a href="#home">HOME</a></li>
+
+                    <li><a href="#highlights">HIGHLIGHTS</a></li>
 
                     <li><a href="#about">ABOUT</a></li>
 
