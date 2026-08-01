@@ -22,8 +22,8 @@ function App() {
             <Landing />
             <Highlights />
             <About />
-            <Events/>
-            {/* <WIE /> */}
+            <Events />
+            {/*<WIE />*/}
             <Team />
             <Gallery />
 

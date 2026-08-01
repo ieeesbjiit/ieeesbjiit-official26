@@ -1,0 +1,303 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+.ieee-navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    padding: 20px 0;
+
+    display: flex;
+    justify-content: center;
+
+    z-index: 1000;
+
+    background: transparent;
+
+    font-family: "Inter", sans-serif;
+}
+
+.ieee-navbar-container {
+    width: 100%;
+    max-width: 1500px;
+
+    padding: 0 4rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 2rem;
+}
+
+.ieee-logo {
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+}
+
+img {
+    width: 190px;
+    height: auto;
+}
+
+.ieee-navbar-menu {
+    display: flex;
+    align-items: center;
+
+    gap: 0.9rem;
+
+    list-style: none;
+}
+
+
+
+.ieee-navbar-menu li a {
+
+    position: relative;
+
+    display: inline-block;
+
+    overflow: hidden;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 1rem;
+
+    font-weight: 500;
+
+    padding: 8px 14px;
+
+    border-radius: 30px;
+
+    transition:
+        color .35s ease,
+        transform .35s ease,
+        box-shadow .35s ease,
+        background .35s ease;
+}
+
+
+
+.ieee-navbar-menu li a::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -150%;
+
+    width: 60%;
+    height: 100%;
+
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(0,181,226,.55),
+        transparent
+    );
+
+    transform: skewX(-25deg);
+
+    transition: left .65s ease;
+
+    z-index: 2;
+}
+
+
+.ieee-navbar-menu li a::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: 30px;
+
+    background: rgba(0,181,226,.08);
+
+    opacity: 0;
+
+    transition: opacity .35s ease;
+
+    z-index: -1;
+}
+
+.ieee-navbar-menu li a:hover {
+
+    color: #EAFBFF;
+
+    transform: translateY(-2px);
+
+    background: rgba(0,181,226,.10);
+
+    border: 1px solid rgba(0,181,226,.25);
+
+    box-shadow:
+        0 6px 20px rgba(0,181,226,.18),
+        inset 0 0 1px rgba(255,255,255,.35);
+}
+
+.ieee-navbar-menu li a:hover::before {
+
+    left: 170%;
+}
+
+.ieee-navbar-menu li a:hover::after {
+
+    opacity: 1;
+}
+
+
+
+.ieee-navbar-toggle {
+
+    display: none;
+
+    background: transparent;
+
+    border: none;
+
+    cursor: pointer;
+}
+
+.ieee-bar {
+
+    display: block;
+
+    width: 26px;
+    height: 3px;
+
+    margin: 5px;
+
+    background: white;
+
+    transition: .35s;
+}
+
+/* ================= MEDIUM SCREENS ================= */
+
+@media (max-width:1300px){
+
+    .ieee-navbar-container{
+        padding:0 2rem;
+    }
+
+    img{
+        width:170px;
+    }
+
+    .ieee-navbar-menu{
+        gap:0.5rem;
+    }
+
+    .ieee-navbar-menu li a{
+        font-size:.92rem;
+        padding:8px 10px;
+    }
+
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:1200px){
+
+    .ieee-navbar-container{
+
+        padding:0 2rem;
+    }
+
+    .ieee-navbar-toggle{
+
+        display:block;
+
+        z-index:1002;
+    }
+
+    .ieee-navbar-menu{
+
+        position:fixed;
+
+        top:0;
+        right:-100%;
+
+        width:260px;
+        height:100vh;
+
+        padding-top:120px;
+
+        display:flex;
+        flex-direction:column;
+        align-items:flex-start;
+
+        gap:1.8rem;
+
+        background:rgba(10,20,30,.95);
+
+        backdrop-filter:blur(12px);
+
+        transition:.4s;
+    }
+
+    .ieee-navbar-menu.active{
+
+        right:0;
+    }
+
+    .ieee-navbar-menu li{
+
+        width:100%;
+    }
+
+    .ieee-navbar-menu li a{
+
+        display:block;
+
+        width:100%;
+
+        padding:12px 24px;
+
+        font-size:1.15rem;
+
+        border-radius:12px;
+    }
+
+    .ieee-navbar-toggle.active .ieee-bar:nth-child(1){
+
+        transform:translateY(8px) rotate(45deg);
+    }
+
+    .ieee-navbar-toggle.active .ieee-bar:nth-child(2){
+
+        opacity:0;
+    }
+
+    .ieee-navbar-toggle.active .ieee-bar:nth-child(3){
+
+        transform:translateY(-8px) rotate(-45deg);
+    }
+
+}
+
+@media(max-width:600px){
+
+    .ieee-navbar-container{
+
+        padding:0 1rem;
+    }
+
+    img{
+
+        width:150px;
+    }
+
+}

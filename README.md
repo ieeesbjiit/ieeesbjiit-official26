@@ -11,8 +11,17 @@
 3. Navbar: Naman
 4. Highlights: Avlika
 5. About: Harsh
-6. Events Section: Kratika
-7. IE Section: Ishita
+6. Events Section: Kratika, Esha
+7. WIE Section: Ishita
 8. Team: Janmejai, Shreshtha
 9. Gallery: Pragya, Vidhaan
 10. Footer: Manushree
+
+### run:
+```bash
+pnpm run dev
+
+# or
+
+npm install && npm run dev
+```
