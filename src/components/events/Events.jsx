@@ -12,7 +12,7 @@ import { FiSend } from "react-icons/fi";
 import "./events.css";
 import events from "./events";
 import PosterCard from "./PosterCard";
-import ieeeLogo from "../../assets/ieee-logo.png";
+import ieeeLogo from "../../assets/ieee_white.png";
 
 const Events = () => {
   const [active, setActive] = useState(0);

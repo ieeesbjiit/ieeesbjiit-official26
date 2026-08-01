@@ -1,6 +1,6 @@
 import './Footer.css';
 import oceanFloor from './assets/ocean-floor.png';
-import ieeeLogo from './assets/ieee-sb-jiit-logo.png';
+import ieeeLogo from '../../assets/ieee_white.png';
 
 /* The first four links come from the public IEEE SB JIIT website. */
 const socialLinks = [

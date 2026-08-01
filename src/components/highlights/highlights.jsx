@@ -4,7 +4,7 @@ import { Users, Megaphone, UsersRound, Venus } from "lucide-react";
 import attendees from './attendees.jpg';
 import members from './members.jpg';
 import WIE from './WIE.jpg';
-import Xenith from './Xenith.png';
+import Xenith from './Xenith.PNG';
 
 import styles from './highlights.module.css'
 

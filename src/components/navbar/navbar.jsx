@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./navbar.css";
-import logo from "./ieee_white.png"; // change path if logo is elsewhere
+import logo from "../../assets/ieee_white.png"; 
 
 const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
