@@ -93,7 +93,7 @@ function FlipCard({ stat, floatDelay, floatDuration }) {
   const handleTap = () => setFlipped((f) => !f);
  
   return (
-    <div
+    <div  
       className="float-wrapper highlights"
       style={{
         animationDelay: `${floatDelay}s`,
@@ -154,7 +154,7 @@ function FlipCard({ stat, floatDelay, floatDuration }) {
  
 export default function FlipStatCards() {
   return (
-    <div className="section-wrap">
+    <div id="highlights" className="section-wrap">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
  

@@ -55,7 +55,7 @@ useEffect(() => {
     ];
 
   return (
-    <section className="events-section">
+    <section id="events" className="events-section">
 
       <div className="events-heading">
 

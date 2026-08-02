@@ -62,7 +62,7 @@ function SectionHeading({ children }) {
 
 export default function Footer() {
   return (
-    <footer className="ocean-footer" style={{ '--ocean-image': `url(${oceanFloor})` }}>
+    <footer  id="contact" className="ocean-footer" style={{ '--ocean-image': `url(${oceanFloor})` }}>
       <div className="ocean-footer__veil" />
       <div className="marine-snow" aria-hidden="true">
         {snow.map((flake) => <i key={flake.id} style={{ left: flake.left, width: flake.size, height: flake.size, opacity: flake.opacity, animationDelay: flake.delay, animationDuration: flake.duration }} />)}

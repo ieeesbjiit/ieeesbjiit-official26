@@ -2,7 +2,7 @@ import React from 'react'
 
 const WIE = () => {
   return (
-    <div>WIE</div>
+    <div id="wie">WIE</div>
   )
 }
 

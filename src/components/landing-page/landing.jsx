@@ -37,7 +37,7 @@ const Landing = () => {
 
   return (
     <>
-      <div className='landing'>
+      <div id = "home" className='landing'>
       <video className="landingvideo" autoPlay muted loop playsInline>
           <source src={landingVideo} type="video/mp4" />
           Your browser does not support the video tag.
