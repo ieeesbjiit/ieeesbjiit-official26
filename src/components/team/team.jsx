@@ -142,7 +142,7 @@ const GlobalStyles = () => {
 
 const Header = () => {
   return (
-    <div
+    <div 
       className="text-center"
       style={{ animation: "fadeDown 0.9s ease both" }}
     >
@@ -220,7 +220,7 @@ const Team = () => {
 
   // console.log("Running....")
   return (
-    <div
+    <div id="team"
       className="relative w-full overflow-hidden select-none"
       style={{
         minHeight: "100vh",

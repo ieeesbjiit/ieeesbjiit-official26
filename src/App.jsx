@@ -8,7 +8,7 @@ import Highlights from "./components/highlights/highlights";
 import Events from "./components/events/Events.jsx";
 import Gallery from "./components/gallery/gallery";
 import Team from "./components/team/team";
-//import WIE from "./components/WIE/WIE";
+import WIE from "./components/WIE/WIE";
 import Footer from "./components/footer/footer";
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
             <Highlights />
             <About />
             <Events />
-            {/*<WIE />*/}
+            <WIE />
             <Team />
             <Gallery />
 

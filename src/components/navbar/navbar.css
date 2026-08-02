@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 
 .ieee-navbar {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
 
@@ -132,7 +132,8 @@ img {
     z-index: -1;
 }
 
-.ieee-navbar-menu li a:hover {
+.ieee-navbar-menu li a:hover,
+.ieee-navbar-menu li a.active  {
 
     color: #EAFBFF;
 
@@ -147,12 +148,14 @@ img {
         inset 0 0 1px rgba(255,255,255,.35);
 }
 
-.ieee-navbar-menu li a:hover::before {
+.ieee-navbar-menu li a:hover::before,
+.ieee-navbar-menu li a.active::before  {
 
     left: 170%;
 }
 
-.ieee-navbar-menu li a:hover::after {
+.ieee-navbar-menu li a:hover::after,
+.ieee-navbar-menu li a.active::after {
 
     opacity: 1;
 }
