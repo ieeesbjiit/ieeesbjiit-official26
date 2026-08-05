@@ -59,13 +59,13 @@
   object-fit: cover;
   display: block;
   transform-origin: center center;
-  filter: grayscale(100%) brightness(0.65);
+  filter: brightness(0.85);
   transition: filter 0.5s ease,
     transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .team-card--hovered .team-card__photo {
-  filter: grayscale(0%) brightness(1.12) contrast(1.08) saturate(1.2);
+  filter: brightness(1.1) contrast(1.05) saturate(1.15);
   transition: filter 0.45s ease, transform 0.1s linear;
 }
 
