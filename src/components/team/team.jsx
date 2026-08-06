@@ -7,7 +7,7 @@ import './team.css';
 
 function Team() {
   return (
-    <div className="team">
+    <div id = "team" className="team">
       <BackgroundEffects />
 
       <section className="team__content">
