@@ -1,6 +1,7 @@
 .team {
   min-height: 100vh;
   width: 100%;
+  display: block;
   background: linear-gradient(
     160deg,
     #020c1b 0%,
@@ -14,7 +15,23 @@
 .team__content {
   position: relative;
   z-index: 10;
-  padding: 5rem 2rem;
-  max-width: 80rem;
+  width: 100%;
+  max-width: 90rem;              /* CHANGED: was 80rem (1280px) → now 1440px */
   margin: 0 auto;
+  padding: 5rem 1rem;            /* CHANGED: was 2rem → now 1rem side padding */
+  box-sizing: border-box;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .team__content {
+    padding: 4rem 1rem;          /* CHANGED: was 1.5rem → now 1rem */
+  }
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+  .team__content {
+    padding: 3rem 0.75rem;       /* CHANGED: was 1rem → now 0.75rem */
+  }
 }
