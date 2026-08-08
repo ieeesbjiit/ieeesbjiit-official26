@@ -1,13 +1,33 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { LinkedInIcon } from '../icons';
 import './TeamCard.css';
 
-function TeamCard({ member, index, revealed, delay, dimmed, onHover }) {
+function TeamCard({
+  member,
+  index,
+  revealed,
+  delay,
+  dimmed,
+  isActive,
+  onToggle,
+  onHover,
+}) {
   const [hovered, setHovered] = useState(false);
   const [tilt, setTilt] = useState({ rx: 0, ry: 0, mx: 50, my: 50 });
   const cardRef = useRef(null);
 
+  // Detect if device is touch-only
+  const [isTouch, setIsTouch] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia('(hover: none)');
+    setIsTouch(mq.matches);
+    const handler = (e) => setIsTouch(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+
   const handleMouseMove = (e) => {
+    if (isTouch) return;
     const el = cardRef.current;
     if (!el) return;
     const { left, top, width, height } = el.getBoundingClientRect();
@@ -22,15 +42,28 @@ function TeamCard({ member, index, revealed, delay, dimmed, onHover }) {
   };
 
   const handleMouseEnter = () => {
+    if (isTouch) return;
     setHovered(true);
     onHover(true);
   };
 
   const handleMouseLeave = () => {
+    if (isTouch) return;
     setHovered(false);
     onHover(false);
     setTilt({ rx: 0, ry: 0, mx: 50, my: 50 });
   };
+
+  // Touch tap toggle handler
+  const handleClick = (e) => {
+    if (!isTouch) return;
+    // Don't toggle if clicking the LinkedIn link
+    if (e.target.closest('.team-card__social-btn')) return;
+    onToggle();
+  };
+
+  // Effective hover state: hover on desktop, tap-active on touch
+  const isEffectivelyHovered = isTouch ? isActive : hovered;
 
   const wrapperStyle = {
     opacity: revealed ? 1 : 0,
@@ -38,29 +71,26 @@ function TeamCard({ member, index, revealed, delay, dimmed, onHover }) {
     transition: `opacity 0.65s ease ${delay}ms, transform 0.65s cubic-bezier(0.22,1,0.36,1) ${delay}ms`,
   };
 
-  const cardTransform = hovered
-    ? `translateY(-28px) scale(1.14) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg)`
-    : 'translateY(0) scale(1) rotateX(0deg) rotateY(0deg)';
+  const cardTransform =
+    hovered && !isTouch
+      ? `translateY(-28px) scale(1.09) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg)`
+      : 'translateY(0) scale(1) rotateX(0deg) rotateY(0deg)';
 
   const glareStyle = {
-    background: hovered
-      ? `radial-gradient(circle at ${tilt.mx}% ${tilt.my}%, rgba(255,255,255,0.15) 0%, transparent 60%)`
-      : 'none',
+    background:
+      hovered && !isTouch
+        ? `radial-gradient(circle at ${tilt.mx}% ${tilt.my}%, rgba(255,255,255,0.15) 0%, transparent 60%)`
+        : 'none',
   };
-
-  const photoTransform = hovered
-    ? `scale(1.65) translate(${tilt.ry * -0.3}px, ${tilt.rx * 0.3}px)`
-    : 'scale(1) translate(0,0)';
 
   const cardClassName = [
     'team-card',
-    hovered && 'team-card--hovered',
-    dimmed && !hovered && 'team-card--dimmed',
+    isEffectivelyHovered && 'team-card--hovered',
+    dimmed && !isEffectivelyHovered && 'team-card--dimmed',
   ]
     .filter(Boolean)
     .join(' ');
 
-  // Prevent card mouse events from firing on link click
   const handleLinkClick = (e) => {
     e.stopPropagation();
   };
@@ -80,17 +110,33 @@ function TeamCard({ member, index, revealed, delay, dimmed, onHover }) {
         onMouseEnter={handleMouseEnter}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
+        onClick={handleClick}
       >
-        <div className="team-card__glare" style={glareStyle} />
-
         <img
           src={member.img}
-          alt={member.name}
+          alt=""
+          aria-hidden="true"
           className="team-card__photo"
-          style={{ transform: photoTransform }}
         />
 
+        <div className="team-card__glare" style={glareStyle} />
+
         <div className="team-card__vignette" />
+
+        <div className="team-card__overlay">
+          <p className="team-card__name">{member.name}</p>
+          <p className="team-card__role">{member.role}</p>
+        </div>
+
+        <div className="team-card__index">{index + 1}</div>
+
+        {member.cutout && (
+          <img
+            src={member.cutout}
+            alt={member.name}
+            className="team-card__photo team-card__photo--front"
+          />
+        )}
 
         <div className="team-card__social-wrapper">
           <a
@@ -105,13 +151,6 @@ function TeamCard({ member, index, revealed, delay, dimmed, onHover }) {
             <LinkedInIcon />
           </a>
         </div>
-
-        <div className="team-card__overlay">
-          <p className="team-card__name">{member.name}</p>
-          <p className="team-card__role">{member.role}</p>
-        </div>
-
-        <div className="team-card__index">{index + 1}</div>
       </div>
     </div>
   );

@@ -1,5 +1,97 @@
 .team-grid {
   display: flex;
   flex-direction: column;
+  align-items: center;                    /* NEW: center children */
+  gap: 2rem;
+  width: 100%;
+}
+
+/* ========================================
+   FEATURED ROW — 2 cards centered
+   ======================================== */
+.team-grid__featured {
+  display: flex;
+  justify-content: center;
   gap: 1.5rem;
+  width: 100%;
+}
+
+.team-grid__featured-cell {
+  min-width: 0;
+  position: relative;
+  width: 220px;
+}
+
+/* ========================================
+   MAIN GRID — use flex-wrap for true centering
+   ======================================== */
+.team-grid__main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;                /* CHANGED: center the wrapped rows */
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.team-grid__cell {
+  min-width: 0;
+  position: relative;
+  width: 200px;                           /* Fixed width — wraps naturally */
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+/* Large tablet */
+@media (max-width: 1200px) {
+  .team-grid__cell,
+  .team-grid__featured-cell {
+    width: 170px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .team-grid {
+    gap: 1.5rem;
+  }
+  .team-grid__featured {
+    gap: 1rem;
+  }
+  .team-grid__main {
+    gap: 1rem;
+  }
+  .team-grid__cell,
+  .team-grid__featured-cell {
+    width: 170px;
+  }
+}
+
+/* Small tablet */
+@media (max-width: 700px) {
+  .team-grid__main {
+    gap: 0.875rem;
+  }
+  .team-grid__cell,
+  .team-grid__featured-cell {
+    width: 150px;
+  }
+}
+
+/* Mobile — 2 per row */
+@media (max-width: 500px) {
+  .team-grid {
+    gap: 1rem;
+  }
+  .team-grid__featured {
+    gap: 0.5rem;
+  }
+  .team-grid__main {
+    gap: 0.5rem;
+  }
+  .team-grid__cell,
+  .team-grid__featured-cell {
+    width: calc((100% - 0.5rem) / 2);
+  }
 }
