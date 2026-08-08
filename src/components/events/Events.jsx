@@ -6,6 +6,7 @@ import {
   FaHeart,
   FaRegComment,
   FaRegBookmark,
+  FaBookmark,
 } from "react-icons/fa";
 import { FiSend } from "react-icons/fi";
 
@@ -18,7 +19,7 @@ const Events = () => {
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState(1);
 const [liked, setLiked] = useState(false);
-
+const [saved, setSaved] = useState(false);
   const nextSlide = () => {
     setDirection(1);
     setActive((prev) => (prev + 1) % events.length);
@@ -164,6 +165,7 @@ useEffect(() => {
 
                 <PosterCard
                   event={current}
+                  compact
                 />
 
               </motion.div>
@@ -204,10 +206,37 @@ useEffect(() => {
               <FiSend />
 
             </div>
-
-            <FaRegBookmark />
+            {saved ? (
+              <FaBookmark
+                onClick={() => setSaved(false)}
+                style={{
+                  color: "white",
+                  cursor: "pointer",
+                  transition: "0.3s ease",
+                }}
+              />
+            ) : (
+              <FaRegBookmark
+                onClick={() => setSaved(true)}
+                style={{
+                  color: "white",
+                  cursor: "pointer",
+                  transition: "0.3s ease",
+                }}
+              />
+            )}
 
           </div>
+
+          <div className="post-caption">
+
+          <strong>{current.title}</strong>
+
+          <span>
+            {current.description}
+          </span>
+
+        </div>
 
         </div>
 

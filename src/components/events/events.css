@@ -4,134 +4,203 @@
 
 .events-section {
   min-height: 100vh;
+
   background: #040812;
+
   padding: 100px 0;
+
   overflow: hidden;
+
   position: relative;
 }
 
 .events-section::before {
   content: "";
+
   position: absolute;
+
   inset: 0;
+
   background:
-    radial-gradient(circle at top left,
+    radial-gradient(
+      circle at top left,
       rgba(0, 183, 255, 0.08),
-      transparent 45%),
-    radial-gradient(circle at bottom right,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at bottom right,
       rgba(37, 99, 235, 0.08),
-      transparent 45%);
+      transparent 45%
+    );
+
   pointer-events: none;
 }
 
+
+/* ===========================
+   EVENTS HEADING
+=========================== */
+
 .events-heading {
   text-align: center;
+
   margin-bottom: 70px;
+
   position: relative;
+
   z-index: 2;
 }
 
 .events-heading h2 {
   color: #fff;
+
   font-size: 3.6rem;
+
   font-weight: 800;
+
   letter-spacing: 8px;
+
+  margin: 0;
 }
 
 .events-heading p {
   margin-top: 14px;
+
   color: #a8b4c7;
+
   font-size: 1rem;
 }
+
 
 /* ===========================
    MAIN WRAPPER
 =========================== */
 
-.events-wrapper{
+.events-wrapper {
+  width: 100%;
 
-    width:100%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:45px;
-    position:relative;
-    perspective:1800px;
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 45px;
+
+  position: relative;
+
+  perspective: 1800px;
 }
+
+
 /* ===========================
    SIDE PREVIEWS
 =========================== */
 
 .preview-card {
-  
-    width:255px;
-
-    filter:brightness(.82);
-
-    transition:
-        transform .45s,
-        opacity .45s,
-        filter .45s;
-
+  width: 255px;
+  height: 330px;
   flex-shrink: 0;
-  
+
+  position: relative;
+
+  z-index: 10;
+
+  filter: brightness(0.82);
+
+  transition:
+    transform 0.45s ease,
+    opacity 0.45s ease,
+    filter 0.45s ease;
 }
+
+
+/* LEFT CARD */
 
 .left-preview {
   transform:
     perspective(1400px)
-    rotateY(28deg)
-    translateX(35px)
+    rotateY(3deg)
+    translateX(10px)
     scale(0.86);
 
-opacity:.65;
-filter:blur(.3px);
-  transition: all .4s ease;
+  opacity: 0.75;
+
+  filter: blur(0.3px) brightness(0.82);
+
+  transition: all 0.4s ease;
 }
+
+
+/* RIGHT CARD */
 
 .right-preview {
   transform:
     perspective(1400px)
-    rotateY(-28deg)
-    translateX(-35px)
+    rotateY(-3deg)
+    translateX(-10px)
     scale(0.86);
 
- opacity:.65;
-filter:blur(.3px);
-  transition: all .4s ease;
+  opacity: 0.75;
+
+  filter: blur(0.3px) brightness(0.82);
+
+  transition: all 0.4s ease;
 }
+
+
+/* SIDE CARD HOVER */
+
+.left-preview:hover,
+.right-preview:hover {
+  opacity: 1;
+
+  filter: brightness(1);
+
+  z-index: 20;
+}
+
+
 /* ===========================
    INSTAGRAM FRAME
 =========================== */
 
 .instagram-frame {
   width: 380px;
+
   height: 600px;
 
   border-radius: 30px;
+
   overflow: hidden;
 
   position: relative;
 
   background: #0b1220;
 
-  border: 1px solid rgba(120,180,255,.18);
+  border: 1px solid rgba(120, 180, 255, 0.18);
 
   box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.08),
-      0 0 0 1px rgba(90,150,255,.08),
-      0 20px 60px rgba(0,0,0,.45),
-      0 0 25px rgba(0,120,255,.12);
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 0 1px rgba(90, 150, 255, 0.08),
+    0 20px 60px rgba(0, 0, 0, 0.45),
+    0 0 25px rgba(0, 120, 255, 0.12);
 
   flex-shrink: 0;
+
+  transition: transform 0.35s ease;
 }
+
+.instagram-frame:hover {
+  transform: translateY(-4px);
+}
+
 
 /* ===========================
    HEADER
 =========================== */
 
 .frame-header {
-
   position: absolute;
 
   top: 0;
@@ -152,14 +221,12 @@ filter:blur(.3px);
 
   z-index: 50;
 
-  background:
-      rgba(11,18,32,.92);
+  background: rgba(11, 18, 32, 0.92);
 
   backdrop-filter: blur(12px);
 }
 
 .profile {
-
   display: flex;
 
   align-items: center;
@@ -168,22 +235,23 @@ filter:blur(.3px);
 }
 
 .profile-pic {
-
   width: 36px;
+
   height: 36px;
 
   border-radius: 50%;
 
+  object-fit: cover;
+
   background:
-      linear-gradient(
+    linear-gradient(
       135deg,
-      #00B7FF,
-      #2563EB
-  );
+      #00b7ff,
+      #2563eb
+    );
 }
 
 .profile-info h4 {
-
   color: white;
 
   font-size: 15px;
@@ -192,20 +260,19 @@ filter:blur(.3px);
 }
 
 .profile-info span {
-
   color: #8fa3bf;
 
   font-size: 13px;
 }
 
 .menu {
-
   color: white;
 
   font-size: 20px;
 
   cursor: pointer;
 }
+
 
 /* ===========================
    POSTER WINDOW
@@ -215,234 +282,317 @@ filter:blur(.3px);
   position: absolute;
 
   top: 60px;
-  bottom: 60px;
 
   left: 0;
+
   right: 0;
 
+  height: 390px;
+
   display: flex;
+
   justify-content: center;
+
   align-items: center;
 
   overflow: hidden;
 
-  perspective: 1500px;
+  background: #0b1220;
 }
 
 .center-poster {
   width: 100%;
+
   height: 100%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  will-change: transform;
-  transform-style: preserve-3d;
 }
+
+
 /* ===========================
    POSTER CARD
 =========================== */
 
 .poster-card {
   position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 0;
 
-  border-radius: 28px;
+  width: 100%;
+
+  height: 100%;
+
   overflow: hidden;
 
-  background: linear-gradient(
-    145deg,
-    rgba(18,31,58,.96),
-    rgba(9,18,34,.98)
-  );
+  border-radius: 24px;
 
-  border: 1px solid rgba(120,180,255,.18);
-
-  box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.08),
-      0 10px 30px rgba(0,0,0,.35);
-
-  transition:
-      transform .35s ease,
-      box-shadow .35s ease;
+  background: #111827;
 }
-/* Glow */
 
-.poster-glow {
 
+/* CENTER POSTER IMAGE */
+
+.event-poster {
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: contain;
+
+  background: #0b1220;
+
+  display: block;
+}
+
+
+/* ===========================
+   SIDE CARD CONTENT
+=========================== */
+
+.poster-card.compact {
+  position: relative;
+
+  cursor: pointer;
+
+  z-index: 20;
+}
+
+.event-preview-content {
   position: absolute;
 
-  width: 320px;
-  height: 320px;
+  inset: 0;
+
+  z-index: 2;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  text-align: center;
+
+  padding: 25px;
+
+  color: white;
 
   background:
     radial-gradient(
-      circle,
-      var(--accent),
-      transparent 70%
-    );
+      circle at top,
+      rgba(0, 183, 255, 0.10),
+      transparent 60%
+    ),
+    #0b1220;
 
-  filter: blur(70px);
+  opacity: 1;
 
-  opacity: .22;
-
-  top: -80px;
-
-  right: -80px;
-
-  z-index: 0;
+  transition: opacity 0.35s ease;
 }
 
-/* Content */
 
-.poster-inner {
-  position: relative;
-  z-index: 2;
+/* CATEGORY */
+
+.preview-label {
+  color: #6faee8;
+
+  font-size: 10px;
+
+  letter-spacing: 2px;
+
+  margin-bottom: 18px;
+}
+
+
+/* EVENT TITLE */
+
+.event-preview-content h2 {
+  color: white;
+
+  font-size: 24px;
+
+  letter-spacing: 2px;
+
+  margin: 0 0 15px;
+}
+
+
+/* DESCRIPTION */
+
+.event-preview-content p {
+  color: #aebbd0;
+
+  font-size: 12px;
+
+  line-height: 1.6;
+
+  max-width: 190px;
+
+  margin: 0;
+}
+
+
+/* HOVER MESSAGE */
+
+.hover-text {
+  margin-top: 25px;
+
+  color: #00b7ff;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  letter-spacing: 1.5px;
+}
+
+
+/* ===========================
+   HOVER POSTER
+=========================== */
+
+.hover-poster {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
 
   height: 100%;
 
+  object-fit: cover;
+
+  opacity: 0;
+
+  transform: scale(0.96);
+
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+
+  z-index: 5;
+}
+
+/* ===========================
+   POSTER HOVER
+=========================== */
+
+.poster-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+
+/* Normal event information */
+
+.event-preview-content {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
   display: flex;
   flex-direction: column;
+
   justify-content: center;
   align-items: center;
 
   text-align: center;
 
-  padding: 36px;
-}
-
-/* Small Label */
-
-.poster-tag {
-
-  display: inline-block;
-
-  padding: 8px 18px;
-
-  border-radius: 999px;
+  padding: 28px;
 
   background:
-      rgba(255,255,255,.07);
+    radial-gradient(
+      circle at top,
+      rgba(0, 183, 255, 0.10),
+      transparent 60%
+    ),
+    #0b1220;
 
-  color: var(--accent);
+  opacity: 1;
 
-  font-size: .78rem;
-
-  letter-spacing: 3px;
-
-  text-transform: uppercase;
-
-  margin-bottom: 18px;
+  transition: opacity 0.35s ease;
 }
 
-/* Heading */
 
-.poster-inner h1 {
+/* Event title */
 
+.event-preview-content h2 {
   color: white;
 
-  font-size: 2.3rem;
+  font-size: 24px;
 
-  font-weight: 800;
+  letter-spacing: 2px;
 
-  line-height: 1.1;
-
-  margin-bottom: 16px;
+  margin: 0 0 15px;
 }
+
 
 /* Description */
 
-.poster-inner p {
+.event-preview-content p {
+  color: #aebbd0;
 
-  color: #b8c3d0;
+  font-size: 12px;
 
-  line-height: 1.55;
+  line-height: 1.6;
 
-  font-size: 0.92rem;
+  max-width: 210px;
 
-  max-width: 270px;
+  margin: 0;
 }
 
-/* Footer */
 
-.poster-footer {
+/* Hover text */
 
-  margin-top: 28px;
+.hover-text {
+  margin-top: 25px;
 
-  width: 100%;
-}
+  color: #00b7ff;
 
-.poster-footer span {
-
-  display: block;
-
-  color: white;
+  font-size: 9px;
 
   font-weight: 600;
 
-  letter-spacing: 1px;
-
-  margin-bottom: 14px;
+  letter-spacing: 1.5px;
 }
 
-.poster-line {
+
+/* Poster */
+
+.hover-poster {
+  position: absolute;
+
+  inset: 0;
 
   width: 100%;
+  height: 100%;
 
-  height: 3px;
+  object-fit: cover;
 
-  border-radius: 999px;
+  opacity: 0;
 
-  background:
-      linear-gradient(
-      90deg,
-      var(--accent),
-      transparent
-  );
+  transform: scale(0.96);
+
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+
+  z-index: 5;
 }
 
-/* ===========================
-   COMPACT VERSION
-=========================== */
 
-.poster-card.compact {
+/* ALL THREE CARDS */
 
-  min-height: 330px;
+.poster-card:hover .hover-poster {
+  opacity: 1;
+
+  transform: scale(1);
 }
 
-.poster-card.compact .poster-inner {
-
-  padding: 28px;
+.poster-card:hover .event-preview-content {
+  opacity: 0;
 }
 
-.poster-card.compact .poster-tag {
-
-  font-size: .68rem;
-
-  margin-bottom: 18px;
-}
-
-.compact-title {
-
-  font-size: 2rem !important;
-
-  margin-bottom: 14px !important;
-}
-
-.compact-description {
-
-  font-size: .88rem !important;
-
-  line-height: 1.7;
-}
-
-.poster-card.compact .poster-footer {
-
-  display: none;
-}
 
 /* ===========================
    INSTAGRAM FOOTER
@@ -450,20 +600,22 @@ filter:blur(.3px);
 
 .frame-footer {
   position: absolute;
-  left: 0;
-  bottom: 0;
 
-  width: 100%;
+  left: 0;
+  right: 0;
+
+  top: 450px;
+
   height: 60px;
 
   display: flex;
+
   justify-content: space-between;
   align-items: center;
 
   padding: 0 18px;
 
-  background: rgba(11, 18, 32, 0.92);
-  backdrop-filter: blur(12px);
+  background: #0b1220;
 
   border-top: 1px solid rgba(255,255,255,.06);
 
@@ -472,45 +624,90 @@ filter:blur(.3px);
 
 .footer-icons {
   display: flex;
+
   align-items: center;
+
   gap: 18px;
 
   color: white;
+
   font-size: 22px;
 }
 
 .frame-footer svg {
+  color: white;
+
   cursor: pointer;
-  transition: .25s ease;
+
+  transition: 0.25s ease;
 }
 
 .frame-footer svg:hover {
-  color: var(--accent);
+  color: #00b7ff;
+
   transform: scale(1.15);
 }
 
+
 /* ===========================
-   NAVIGATION
+   POST CAPTION
+=========================== */
+.post-caption {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  min-height: 90px;
+
+  padding: 14px 20px 16px;
+
+  box-sizing: border-box;
+
+  background: #0b1220;
+
+  color: white;
+
+  z-index: 8;
+}
+
+.post-caption strong {
+  display: inline;
+
+  color: #ffffff;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  margin-right: 6px;
+}
+
+.post-caption span {
+  display: inline;
+
+  color: #c8d2df;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+/* ===========================
+   NAVIGATION BUTTONS
 =========================== */
 
 .nav-btn {
   width: 56px;
+
   height: 56px;
 
-  border: none;
+  border: 1px solid rgba(120, 180, 255, 0.18);
+
   border-radius: 50%;
 
- .nav-btn{
-
-    background:rgba(10,18,34,.75);
-
-    border:1px solid rgba(120,180,255,.18);
-
-    box-shadow:
-        0 0 15px rgba(0,183,255,.08);
-
-    backdrop-filter:blur(15px);
-}
+  background: rgba(10, 18, 34, 0.75);
 
   color: white;
 
@@ -518,13 +715,19 @@ filter:blur(.3px);
 
   cursor: pointer;
 
-  transition: .3s ease;
+  transition: 0.3s ease;
 
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(15px);
+
+  box-shadow:
+    0 0 15px rgba(0, 183, 255, 0.08);
+
+  flex-shrink: 0;
 }
 
 .nav-btn:hover {
-  background: var(--accent);
+  background: #00b7ff;
+
   color: #04111f;
 
   transform: scale(1.08);
@@ -538,6 +741,7 @@ filter:blur(.3px);
   margin-left: 10px;
 }
 
+
 /* ===========================
    DOTS
 =========================== */
@@ -546,7 +750,9 @@ filter:blur(.3px);
   margin-top: 45px;
 
   display: flex;
+
   justify-content: center;
+
   align-items: center;
 
   gap: 10px;
@@ -554,16 +760,18 @@ filter:blur(.3px);
 
 .dot {
   width: 10px;
+
   height: 10px;
 
   border: none;
+
   border-radius: 50%;
 
-  background: rgba(255,255,255,.25);
+  background: rgba(255, 255, 255, 0.25);
 
   cursor: pointer;
 
-  transition: .3s ease;
+  transition: 0.3s ease;
 }
 
 .active-dot {
@@ -571,26 +779,14 @@ filter:blur(.3px);
 
   border-radius: 20px;
 
-  background: linear-gradient(
-    90deg,
-    #00B7FF,
-    #2563EB
-  );
+  background:
+    linear-gradient(
+      90deg,
+      #00b7ff,
+      #2563eb
+    );
 }
 
-/* ===========================
-   HOVER
-=========================== */
-
-.preview-card:hover {
-  opacity: .9;
-}
-
-.instagram-frame:hover {
-  transform: translateY(-4px);
-
-  transition: .35s ease;
-}
 
 /* ===========================
    RESPONSIVE
@@ -608,10 +804,12 @@ filter:blur(.3px);
 
   .instagram-frame {
     width: 380px;
+
     height: 690px;
   }
 
 }
+
 
 @media (max-width: 900px) {
 
@@ -625,10 +823,12 @@ filter:blur(.3px);
 
   .instagram-frame {
     width: 360px;
+
     height: 660px;
   }
 
 }
+
 
 @media (max-width: 600px) {
 
@@ -638,88 +838,26 @@ filter:blur(.3px);
 
   .events-heading h2 {
     font-size: 2.4rem;
+
     letter-spacing: 4px;
   }
 
   .events-heading p {
-    font-size: .9rem;
+    font-size: 0.9rem;
   }
 
   .instagram-frame {
     width: 95%;
+
     height: 620px;
-  }
-
-  .poster-inner {
-    padding: 28px;
-  }
-
-  .poster-inner h1 {
-    font-size: 2.2rem;
-  }
-
-  .poster-inner p {
-    font-size: .92rem;
   }
 
   .nav-btn {
     width: 48px;
+
     height: 48px;
+
     font-size: 20px;
   }
 
-}
-.poster-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 2px;
-
-    background: linear-gradient(
-        135deg,
-        rgba(140,210,255,.9),
-        rgba(90,140,255,.25),
-        rgba(255,255,255,.08)
-    );
-
-    -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-
-    opacity: .8;
-    pointer-events: none;
-}
-.poster-card::after {
-    content: "";
-    position: absolute;
-    inset: -2px;
-    border-radius: inherit;
-
-    box-shadow:
-        0 0 35px rgba(0,150,255,.18),
-        0 0 12px rgba(120,190,255,.25);
-
-    opacity: .8;
-    z-index: -1;
-}
-.poster-card{
-    transition:
-        transform .35s ease,
-        box-shadow .35s ease;
-}
-
-.poster-card:hover{
-
-    transform:
-        translateY(-8px)
-        scale(1.02);
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.1),
-        0 18px 45px rgba(0,0,0,.45),
-        0 0 35px rgba(0,183,255,.15);
 }

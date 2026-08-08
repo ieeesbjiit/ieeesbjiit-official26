@@ -1,41 +1,43 @@
 import { motion } from "framer-motion";
 
-const PosterCard = ({ event = false }) => {
+const PosterCard = ({ event, compact = false }) => {
   return (
     <motion.div
-      className={"poster-card"}
-      style={{ "--accent": event.accent }}
+      className={`poster-card ${compact ? "compact" : "main"}`}
       whileHover={{
-        scale:1.02,
+        scale: 1.02,
       }}
       transition={{
-        type: "spring",
-        stiffness: 220,
-        damping: 18,
+        duration: 0.3,
       }}
     >
-      <div className="poster-glow"></div>
 
-      <div className="poster-inner">
+      {/* Event information shown normally */}
 
-        <span className="poster-tag">
-          IEEE SB JIIT
+      <div className="event-preview-content">
+
+        <span className="preview-label">
+          IEEE EVENT
         </span>
 
-        <h1>
-          {event.title}
-        </h1>
+        <h2>{event.title}</h2>
 
-        <p>
-          {event.description}
-        </p>
+        <p>{event.description}</p>
 
-        <div className="poster-footer">
-  <span>Explore Event</span>
-  <div className="poster-line"></div>
-</div>
+        <span className="hover-text">
+          HOVER TO VIEW POSTER
+        </span>
 
       </div>
+
+
+      {/* Poster appears on hover */}
+
+      <img
+        src={event.image}
+        alt={event.title}
+        className="hover-poster"
+      />
 
     </motion.div>
   );
