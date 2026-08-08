@@ -71,7 +71,7 @@ const TEAM = [
   },
   {
     name: "Ansh Goyal",
-    role: "Organization Secretary",
+    role: "Organising Secretary",
     img: ansh,
     cutout: ansh_o,
     linkedin: "https://www.linkedin.com/in/anshgoyal-ml",
@@ -84,7 +84,7 @@ const TEAM = [
     linkedin: "https://www.linkedin.com/in/anish-dutta-338738375/",
   },
   {
-    name: "Edhita Nakura",
+    name: "Edhita Naruka",
     role: "WIE Head",
     img: edhita,
     cutout: edhita_o,
