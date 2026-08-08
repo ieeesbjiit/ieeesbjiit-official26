@@ -112,12 +112,15 @@ function TeamCard({
         onMouseLeave={handleMouseLeave}
         onClick={handleClick}
       >
+      <div className="team-card__photo-mask">
         <img
           src={member.img}
           alt=""
           aria-hidden="true"
           className="team-card__photo"
         />
+      </div>
+        
 
         <div className="team-card__glare" style={glareStyle} />
 
