@@ -22,7 +22,7 @@ import aanya from "./Team posters/aanya.png";
 // Cutout photos (person only, transparent background)
 import rayansh_o from "./Team posters/rayansh_o.png";
 import abhay_o from "./Team posters/abhay sir_o.png";
-import adhirath_o from "./Team posters/bani_o.png";
+import adhirath_o from "./Team posters/adhirath sir_o.png";
 import bani_o from "./Team posters/bani_o.png";
 import ansh_o from "./Team posters/ansh_o.png";
 import anish_o from "./Team posters/anish_o.png";
