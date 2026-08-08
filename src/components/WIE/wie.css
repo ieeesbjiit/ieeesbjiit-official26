@@ -1,0 +1,283 @@
+/* WIE section — scoped so it can't leak into the rest of the site.
+   box-sizing reset is intentionally scoped to .wie-section's own subtree
+   (not global) — needed because .wie-card mixes a fixed width with padding. */
+.wie-section,
+.wie-section *,
+.wie-section *::before,
+.wie-section *::after {
+  box-sizing: border-box;
+}
+
+.wie-section {
+  width: 100%;
+  min-height: 100vh;
+  font-family: "Times New Roman", Times, serif;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  /* 76px fixed navbar + ~34px breathing room, so the card never sits flush under it */
+  padding: 110px 24px 60px;
+  background: radial-gradient(circle at 20% 15%, rgba(79, 168, 232, 0.1) 0%, transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(79, 216, 255, 0.08) 0%, transparent 50%), #000023;
+}
+
+/* ---------- Card shell ---------- */
+.wie-section .wie-card {
+  width: 1180px;
+  max-width: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(16, 27, 74, 0.62) 0%,
+    rgba(21, 32, 88, 0.58) 45%,
+    rgba(11, 19, 50, 0.66) 100%
+  );
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(190, 205, 255, 0.14);
+  border-radius: 32px;
+  padding: 66px 80px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 56px; /* the only thing separating the two halves — real reserved space, so text and carousel can never touch */
+  overflow: hidden; /* nothing—incl. carousel side faces—may escape the card */
+  position: relative;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07) inset, 0 0 0 1px rgba(255, 255, 255, 0.025) inset,
+    0 18px 40px -18px rgba(0, 0, 8, 0.45);
+}
+
+/* ---------- Left: logo, heading, description (priority column, never shrinks) ---------- */
+.wie-section .wie-content {
+  flex: 1 1 calc(50% - 28px);
+  max-width: calc(50% - 28px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.wie-section .wie-logo {
+  width: 233px;
+  height: auto;
+  margin: 0 0 6px 0; /* sits flush with the text column's left edge, tight gap down to the heading */
+  align-self: flex-start;
+}
+
+.wie-section .wie-heading {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 39px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #ffffff;
+  letter-spacing: 0.01em;
+  margin-bottom: 18px;
+}
+
+.wie-section .wie-paragraph {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 16.5px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 480px;
+}
+
+/* ---------- Objectives: compact list with a subtle mark instead of plain stacked lines ---------- */
+.wie-section .wie-objectives {
+  list-style: none;
+  margin: 20px 0 0 0;
+  padding: 0;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wie-section .wie-objectives li {
+  position: relative;
+  padding-left: 20px;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.wie-section .wie-objectives li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(180, 200, 255, 0.55);
+  box-shadow: 0 0 6px rgba(150, 180, 255, 0.35);
+}
+
+/* ---------- Right: embedded 3D carousel (~30-35% of card width, shrinks first) ---------- */
+.wie-section .wie-carousel-wrap {
+  flex: 1 1 calc(50% - 28px);
+  max-width: calc(50% - 28px);
+  min-width: 160px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.wie-section .wie-stage {
+  position: relative;
+  width: 51%; /* buffer inside the column for rotated side faces */
+  aspect-ratio: 1 / 1; /* true square faces — a real cube, not a stretched rectangle */
+  transform: rotateX(0deg) rotateY(0deg);
+  transition: transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
+  /* perspective and --car-scale are set inline by React, proportional to rendered width */
+}
+
+.wie-section .wie-stage::before {
+  content: "";
+  position: absolute;
+  left: -4%;
+  right: -4%;
+  bottom: -13%;
+  height: 16%;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.38) 0%, rgba(0, 0, 0, 0) 75%);
+  filter: blur(calc(11px * var(--car-scale, 1)));
+  z-index: -2;
+  pointer-events: none;
+}
+
+.wie-section .wie-stage::after {
+  content: "";
+  position: absolute;
+  inset: 8%;
+  z-index: -1;
+  background: rgba(79, 168, 232, 0.16);
+  filter: blur(calc(18px * var(--car-scale, 1)));
+}
+
+.wie-section .wie-cube {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 1.15s cubic-bezier(0.65, 0, 0.35, 1);
+  will-change: transform;
+}
+
+.wie-section .wie-face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  backface-visibility: hidden;
+  border-radius: 0;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14);
+  background: #0a1a2e;
+}
+
+.wie-section .wie-face img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* crops to fill the square face without stretching — the photo's own aspect ratio is preserved */
+  display: block;
+}
+
+.wie-section .wie-face .wie-fog {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.02) 35%,
+    rgba(0, 0, 0, 0.12) 100%
+  );
+}
+
+.wie-section .wie-face .wie-sheen {
+  position: absolute;
+  top: -30%;
+  left: -20%;
+  width: 140%;
+  height: 70%;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 60%);
+  transform: rotate(-8deg);
+}
+
+.wie-section .wie-dots {
+  position: relative;
+  margin-top: 39px; /* clears the front face + its glow, so dots never sit over the photos */
+  display: flex;
+  gap: 7px;
+}
+
+.wie-section .wie-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.wie-section .wie-dot.active {
+  background: #ffffff;
+  transform: scale(1.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wie-section .wie-cube,
+  .wie-section .wie-stage {
+    transition: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .wie-section .wie-card {
+    flex-direction: column;
+    padding: 44px 36px;
+    gap: 36px;
+  }
+  .wie-section .wie-content {
+    flex: none;
+    width: 100%;
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+  .wie-section .wie-logo {
+    align-self: center;
+    margin-left: 0;
+  }
+  .wie-section .wie-paragraph {
+    max-width: 480px;
+  }
+  .wie-section .wie-objectives {
+    max-width: 480px;
+    align-items: center;
+  }
+  .wie-section .wie-objectives li {
+    text-align: left;
+  }
+  .wie-section .wie-carousel-wrap {
+    flex: none;
+    width: 100%;
+    max-width: 380px;
+    min-width: 0;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .wie-section .wie-card {
+    padding: 32px 20px;
+  }
+  .wie-section .wie-carousel-wrap {
+    max-width: 100%;
+  }
+}
