@@ -1,6 +1,4 @@
-/* WIE section — scoped so it can't leak into the rest of the site.
-   box-sizing reset is intentionally scoped to .wie-section's own subtree
-   (not global) — needed because .wie-card mixes a fixed width with padding. */
+
 .wie-section,
 .wie-section *,
 .wie-section *::before,
@@ -15,13 +13,11 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  /* 76px fixed navbar + ~34px breathing room, so the card never sits flush under it */
   padding: 110px 24px 60px;
   background: radial-gradient(circle at 20% 15%, rgba(79, 168, 232, 0.1) 0%, transparent 45%),
     radial-gradient(circle at 85% 85%, rgba(79, 216, 255, 0.08) 0%, transparent 50%), #000023;
 }
 
-/* ---------- Card shell ---------- */
 .wie-section .wie-card {
   width: 1180px;
   max-width: 100%;
@@ -39,14 +35,13 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 56px; /* the only thing separating the two halves — real reserved space, so text and carousel can never touch */
-  overflow: hidden; /* nothing—incl. carousel side faces—may escape the card */
+  gap: 56px; 
+  overflow: hidden; 
   position: relative;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07) inset, 0 0 0 1px rgba(255, 255, 255, 0.025) inset,
     0 18px 40px -18px rgba(0, 0, 8, 0.45);
 }
 
-/* ---------- Left: logo, heading, description (priority column, never shrinks) ---------- */
 .wie-section .wie-content {
   flex: 1 1 calc(50% - 28px);
   max-width: calc(50% - 28px);
@@ -59,7 +54,7 @@
 .wie-section .wie-logo {
   width: 233px;
   height: auto;
-  margin: 0 0 6px 0; /* sits flush with the text column's left edge, tight gap down to the heading */
+  margin: 0 0 6px 0; 
   align-self: flex-start;
 }
 
@@ -82,7 +77,6 @@
   max-width: 480px;
 }
 
-/* ---------- Objectives: compact list with a subtle mark instead of plain stacked lines ---------- */
 .wie-section .wie-objectives {
   list-style: none;
   margin: 20px 0 0 0;
@@ -115,7 +109,6 @@
   box-shadow: 0 0 6px rgba(150, 180, 255, 0.35);
 }
 
-/* ---------- Right: embedded 3D carousel (~30-35% of card width, shrinks first) ---------- */
 .wie-section .wie-carousel-wrap {
   flex: 1 1 calc(50% - 28px);
   max-width: calc(50% - 28px);
@@ -129,12 +122,11 @@
 
 .wie-section .wie-stage {
   position: relative;
-  width: 51%; /* buffer inside the column for rotated side faces */
-  aspect-ratio: 1 / 1; /* true square faces — a real cube, not a stretched rectangle */
+  width: 51%; 
+  aspect-ratio: 1 / 1; 
   transform: rotateX(0deg) rotateY(0deg);
   transition: transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
   will-change: transform;
-  /* perspective and --car-scale are set inline by React, proportional to rendered width */
 }
 
 .wie-section .wie-stage::before {
@@ -182,7 +174,7 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* crops to fill the square face without stretching — the photo's own aspect ratio is preserved */
+  object-fit: cover; 
   display: block;
 }
 
@@ -209,7 +201,7 @@
 
 .wie-section .wie-dots {
   position: relative;
-  margin-top: 39px; /* clears the front face + its glow, so dots never sit over the photos */
+  margin-top: 39px; 
   display: flex;
   gap: 7px;
 }
