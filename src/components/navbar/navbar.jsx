@@ -50,7 +50,7 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
 }, []);
     return (
-        <nav className="ieee-navbar">
+        <nav className={`ieee-navbar ${activeSection !== "home" ? "scrolled" : ""}`}>
             <div className="ieee-navbar-container">
 
                 <div className="ieee-logo">
