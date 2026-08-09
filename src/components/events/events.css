@@ -322,6 +322,13 @@
   background: #0b1220;
 }
 
+.poster-window {
+  cursor: pointer;
+}
+
+.poster-window:hover .hover-poster {
+  cursor: pointer;
+}
 
 /* ================================================= */
 /* NORMAL EVENT CONTENT */

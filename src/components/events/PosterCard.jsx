@@ -54,7 +54,18 @@ const PosterCard = ({ event, center = false }) => {
 
       {/* POSTER AREA */}
 
-     <div className="poster-window">
+     <div
+        className="poster-window"
+        onClick={() => {
+          if (event.instagramLink) {
+            window.open(
+              event.instagramLink,
+              "_blank",
+              "noopener,noreferrer"
+            );
+          }
+        }}
+      >
 
           {center ? (
 
