@@ -10,7 +10,7 @@ import {
 
 import { FiSend } from "react-icons/fi";
 
-import ieeeLogo from "../../assets/ieee_white.png";
+import ieeeLogo from "../../assets/ieee_logo.jpeg";
 
 const PosterCard = ({ event, center = false }) => {
   const [liked, setLiked] = useState(false);

@@ -70,7 +70,7 @@ const events = [
     id: 7,
     title: "LUMINA",
     description:
-      "A creative and engaging event bringing together ideas, innovation, and exciting experiences.",
+    "A dynamic tech event by WIE bringing together coding, innovation, and career growth. A platform to learn, build, showcase, and connect - empowering students to turn ideas into impact.",
     accent: "#F59E0B",
     image: luminaPoster,
     instagramLink: "https://www.instagram.com/p/DQoOwq2ETPP/",
