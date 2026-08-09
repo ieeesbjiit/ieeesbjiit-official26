@@ -59,7 +59,16 @@
     cursor: pointer;
 
     flex-shrink: 0;
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-end;
 }
+
+.wielogo {
+    width: 53px;
+    padding-bottom: 8px;
+}
+    
 
 img {
     width: 190px;

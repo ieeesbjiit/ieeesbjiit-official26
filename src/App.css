@@ -112,6 +112,12 @@ div.landing {
     height: auto;
 }
 
+@media (max-width: 1350px) {
+    .landingLeft > .title {
+        max-width: 12ch;
+    }
+}
+
 @media (max-width: 900px) {
     div.landing {
         flex-direction: column;

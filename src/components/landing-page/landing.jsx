@@ -1,7 +1,6 @@
 import ieeelogo from './logo.webm'
 import Terminal from './Terminal';
 import landingVideo from './underwater.mp4'
-import WIElogo from '../../components/WIE/images/wie-logo.png'
 
 const Landing = () => {
   return (
@@ -45,7 +44,7 @@ const Landing = () => {
           <source src={ieeelogo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        <img src={WIElogo} alt="IEEE Women in Engineering" />
+        {/* <img src={WIElogo} alt="IEEE Women in Engineering" /> */}
       </div>
         
       </div>
