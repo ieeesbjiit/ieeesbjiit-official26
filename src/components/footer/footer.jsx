@@ -29,7 +29,7 @@ const developers = [
   { name: 'Ishita', href:'https://www.linkedin.com/in/ishita-singh-1b533b38b/'},
   { name: 'Janmejai Pandey', href: 'https://www.linkedin.com/in/janmejai-pandey-050b56387' },
   { name: 'Pragya Ahlawat', href: 'https://www.linkedin.com/in/pragya-ahlawat/' },
-  { name: 'Rushil Koul', href: 'https://www.linkedin.com/in/rushil-koul' },
+  { name: 'Rushil Koul', href: 'https://www.linkedin.com/in/rushilkoul/' },
   { name: 'Tanishq Gupta', href: 'https://www.linkedin.com/in/tanishq-gupta-280909384' },
   { name: 'Vidhaan Tripathi', href: 'https://www.linkedin.com/in/vidhaan-tripathi-9b1974368/' },
 ];
