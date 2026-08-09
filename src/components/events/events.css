@@ -1,6 +1,6 @@
-/* ===========================
-   EVENTS SECTION
-=========================== */
+/* ================================================= */
+/* EVENTS SECTION */
+/* ================================================= */
 
 .events-section {
   min-height: 100vh;
@@ -13,6 +13,11 @@
 
   position: relative;
 }
+
+
+/* ================================================= */
+/* BACKGROUND GLOW */
+/* ================================================= */
 
 .events-section::before {
   content: "";
@@ -37,14 +42,14 @@
 }
 
 
-/* ===========================
-   EVENTS HEADING
-=========================== */
+/* ================================================= */
+/* HEADING */
+/* ================================================= */
 
 .events-heading {
   text-align: center;
 
-  margin-bottom: 70px;
+  margin-bottom: 65px;
 
   position: relative;
 
@@ -72,12 +77,14 @@
 }
 
 
-/* ===========================
-   MAIN WRAPPER
-=========================== */
+/* ================================================= */
+/* MAIN WRAPPER */
+/* ================================================= */
 
 .events-wrapper {
   width: 100%;
+
+  height: 640px;
 
   display: flex;
 
@@ -85,120 +92,124 @@
 
   align-items: center;
 
-  gap: 45px;
-
   position: relative;
+
+  overflow: visible;
+}
+
+
+/* ================================================= */
+/* INSTAGRAM CAROUSEL */
+/* ================================================= */
+
+.instagram-carousel {
+  position: relative;
+
+  width: 100%;
+
+  max-width: 1100px;
+
+  height: 620px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
 
   perspective: 1800px;
 }
 
 
-/* ===========================
-   SIDE PREVIEWS
-=========================== */
+/* ================================================= */
+/* INDIVIDUAL CAROUSEL ITEM */
+/* ================================================= */
 
-.preview-card {
-  width: 255px;
-  height: 330px;
-  flex-shrink: 0;
+.carousel-post {
+  position: absolute;
 
-  position: relative;
+  top: 10px;
 
-  z-index: 10;
+  left: 50%;
 
-  filter: brightness(0.82);
-
-  transition:
-    transform 0.45s ease,
-    opacity 0.45s ease,
-    filter 0.45s ease;
-}
-
-
-/* LEFT CARD */
-
-.left-preview {
-  transform:
-    perspective(1400px)
-    rotateY(3deg)
-    translateX(10px)
-    scale(0.86);
-
-  opacity: 0.75;
-
-  filter: blur(0.3px) brightness(0.82);
-
-  transition: all 0.4s ease;
-}
-
-
-/* RIGHT CARD */
-
-.right-preview {
-  transform:
-    perspective(1400px)
-    rotateY(-3deg)
-    translateX(-10px)
-    scale(0.86);
-
-  opacity: 0.75;
-
-  filter: blur(0.3px) brightness(0.82);
-
-  transition: all 0.4s ease;
-}
-
-
-/* SIDE CARD HOVER */
-
-.left-preview:hover,
-.right-preview:hover {
-  opacity: 1;
-
-  filter: brightness(1);
-
-  z-index: 20;
-}
-
-
-/* ===========================
-   INSTAGRAM FRAME
-=========================== */
-
-.instagram-frame {
   width: 380px;
 
   height: 600px;
 
-  border-radius: 30px;
+  margin-left: -190px;
 
-  overflow: hidden;
+  transform-origin: center center;
+
+  will-change: transform, opacity, filter;
+
+  backface-visibility: hidden;
+
+  /*
+    IMPORTANT:
+    All three Instagram posts need
+    pointer events for hover.
+  */
+  pointer-events: auto;
+}
+
+
+/* ================================================= */
+/* INSTAGRAM POST */
+/* ================================================= */
+
+.instagram-post {
+  width: 380px;
+
+  height: 600px;
 
   position: relative;
 
+  overflow: hidden;
+
+  border-radius: 30px;
+
   background: #0b1220;
 
-  border: 1px solid rgba(120, 180, 255, 0.18);
+  border: 1px solid
+    rgba(120, 180, 255, 0.18);
 
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 0 0 1px rgba(90, 150, 255, 0.08),
-    0 20px 60px rgba(0, 0, 0, 0.45),
-    0 0 25px rgba(0, 120, 255, 0.12);
+    inset 0 1px 0
+      rgba(255, 255, 255, 0.08),
+    0 0 0 1px
+      rgba(90, 150, 255, 0.08),
+    0 20px 60px
+      rgba(0, 0, 0, 0.45),
+    0 0 25px
+      rgba(0, 120, 255, 0.12);
 
-  flex-shrink: 0;
-
-  transition: transform 0.35s ease;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
-.instagram-frame:hover {
-  transform: translateY(-4px);
+
+/* Slight highlight on hovered post */
+
+.instagram-post:hover {
+  border-color:
+    rgba(120, 180, 255, 0.28);
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(255, 255, 255, 0.08),
+    0 0 0 1px
+      rgba(90, 150, 255, 0.10),
+    0 20px 60px
+      rgba(0, 0, 0, 0.5),
+    0 0 30px
+      rgba(0, 120, 255, 0.16);
 }
 
 
-/* ===========================
-   HEADER
-=========================== */
+/* ================================================= */
+/* HEADER */
+/* ================================================= */
 
 .frame-header {
   position: absolute;
@@ -219,12 +230,16 @@
 
   padding: 0 18px;
 
-  z-index: 50;
+  box-sizing: border-box;
 
-  background: rgba(11, 18, 32, 0.92);
+  z-index: 10;
+
+  background:
+    rgba(11, 18, 32, 0.94);
 
   backdrop-filter: blur(12px);
 }
+
 
 .profile {
   display: flex;
@@ -233,6 +248,7 @@
 
   gap: 12px;
 }
+
 
 .profile-pic {
   width: 36px;
@@ -251,6 +267,16 @@
     );
 }
 
+
+.profile-info {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+
 .profile-info h4 {
   color: white;
 
@@ -259,24 +285,26 @@
   margin: 0;
 }
 
+
 .profile-info span {
   color: #8fa3bf;
 
   font-size: 13px;
 }
 
+
 .menu {
   color: white;
 
   font-size: 20px;
 
-  cursor: pointer;
+  letter-spacing: 2px;
 }
 
 
-/* ===========================
-   POSTER WINDOW
-=========================== */
+/* ================================================= */
+/* POSTER WINDOW */
+/* ================================================= */
 
 .poster-window {
   position: absolute;
@@ -285,74 +313,19 @@
 
   left: 0;
 
-  right: 0;
+  width: 100%;
 
   height: 390px;
 
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
-
   overflow: hidden;
 
   background: #0b1220;
 }
 
-.center-poster {
-  width: 100%;
 
-  height: 100%;
-}
-
-
-/* ===========================
-   POSTER CARD
-=========================== */
-
-.poster-card {
-  position: relative;
-
-  width: 100%;
-
-  height: 100%;
-
-  overflow: hidden;
-
-  border-radius: 24px;
-
-  background: #111827;
-}
-
-
-/* CENTER POSTER IMAGE */
-
-.event-poster {
-  width: 100%;
-
-  height: 100%;
-
-  object-fit: contain;
-
-  background: #0b1220;
-
-  display: block;
-}
-
-
-/* ===========================
-   SIDE CARD CONTENT
-=========================== */
-
-.poster-card.compact {
-  position: relative;
-
-  cursor: pointer;
-
-  z-index: 20;
-}
-
+/* ================================================= */
+/* NORMAL EVENT CONTENT */
+/* ================================================= */
 
 .event-preview-content {
   position: absolute;
@@ -371,7 +344,9 @@
 
   text-align: center;
 
-  padding: 25px;
+  padding: 28px;
+
+  box-sizing: border-box;
 
   color: white;
 
@@ -385,11 +360,14 @@
 
   opacity: 1;
 
-  transition: opacity 0.35s ease;
+  transition:
+    opacity 0.4s ease;
 }
 
 
+/* ================================================= */
 /* CATEGORY */
+/* ================================================= */
 
 .preview-label {
   color: #6faee8;
@@ -402,7 +380,9 @@
 }
 
 
+/* ================================================= */
 /* EVENT TITLE */
+/* ================================================= */
 
 .event-preview-content h2 {
   color: white;
@@ -415,120 +395,9 @@
 }
 
 
+/* ================================================= */
 /* DESCRIPTION */
-
-.event-preview-content p {
-  color: #aebbd0;
-
-  font-size: 12px;
-
-  line-height: 1.6;
-
-  max-width: 190px;
-
-  margin: 0;
-}
-
-
-/* HOVER MESSAGE */
-
-.hover-text {
-  margin-top: 25px;
-
-  color: #00b7ff;
-
-  font-size: 9px;
-
-  font-weight: 600;
-
-  letter-spacing: 1.5px;
-}
-
-
-/* ===========================
-   HOVER POSTER
-=========================== */
-
-.hover-poster {
-  position: absolute;
-
-  inset: 0;
-
-  width: 100%;
-
-  height: 100%;
-
-  object-fit: cover;
-
-  opacity: 0;
-
-  transform: scale(0.96);
-
-  transition:
-    opacity 0.4s ease,
-    transform 0.4s ease;
-
-  z-index: 5;
-}
-
-/* ===========================
-   POSTER HOVER
-=========================== */
-
-.poster-card {
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-
-/* Normal event information */
-
-.event-preview-content {
-  position: absolute;
-
-  inset: 0;
-
-  z-index: 2;
-
-  display: flex;
-  flex-direction: column;
-
-  justify-content: center;
-  align-items: center;
-
-  text-align: center;
-
-  padding: 28px;
-
-  background:
-    radial-gradient(
-      circle at top,
-      rgba(0, 183, 255, 0.10),
-      transparent 60%
-    ),
-    #0b1220;
-
-  opacity: 1;
-
-  transition: opacity 0.35s ease;
-}
-
-
-/* Event title */
-
-.event-preview-content h2 {
-  color: white;
-
-  font-size: 24px;
-
-  letter-spacing: 2px;
-
-  margin: 0 0 15px;
-}
-
-
-/* Description */
+/* ================================================= */
 
 .event-preview-content p {
   color: #aebbd0;
@@ -543,7 +412,9 @@
 }
 
 
-/* Hover text */
+/* ================================================= */
+/* HOVER TEXT */
+/* ================================================= */
 
 .hover-text {
   margin-top: 25px;
@@ -558,7 +429,9 @@
 }
 
 
-/* Poster */
+/* ================================================= */
+/* POSTER IMAGE */
+/* ================================================= */
 
 .hover-poster {
   position: absolute;
@@ -566,43 +439,59 @@
   inset: 0;
 
   width: 100%;
+
   height: 100%;
 
   object-fit: cover;
 
   opacity: 0;
 
-  transform: scale(0.96);
+  transform: scale(1.04);
 
   transition:
-    opacity 0.4s ease,
-    transform 0.4s ease;
+    opacity 0.45s ease,
+    transform 0.55s ease;
 
   z-index: 5;
+
+  /*
+    Image itself doesn't block hover
+    from the Instagram post.
+  */
+  pointer-events: none;
 }
 
 
-/* ALL THREE CARDS */
+/* ================================================= */
+/* ALL THREE POSTS HOVER */
+/* ================================================= */
 
-.poster-card:hover .hover-poster {
+/*
+  Because .carousel-post has pointer-events: auto,
+  this works for LEFT + CENTER + RIGHT.
+*/
+
+.instagram-post:hover .hover-poster {
   opacity: 1;
 
   transform: scale(1);
 }
 
-.poster-card:hover .event-preview-content {
+
+.instagram-post:hover .event-preview-content {
   opacity: 0;
 }
 
 
-/* ===========================
-   INSTAGRAM FOOTER
-=========================== */
+/* ================================================= */
+/* INSTAGRAM FOOTER */
+/* ================================================= */
 
 .frame-footer {
   position: absolute;
 
   left: 0;
+
   right: 0;
 
   top: 450px;
@@ -612,16 +501,22 @@
   display: flex;
 
   justify-content: space-between;
+
   align-items: center;
 
   padding: 0 18px;
 
+  box-sizing: border-box;
+
   background: #0b1220;
 
-  border-top: 1px solid rgba(255,255,255,.06);
+  border-top:
+    1px solid
+    rgba(255, 255, 255, 0.06);
 
   z-index: 10;
 }
+
 
 .footer-icons {
   display: flex;
@@ -635,29 +530,41 @@
   font-size: 22px;
 }
 
+
 .frame-footer svg {
   color: white;
 
   cursor: pointer;
 
-  transition: 0.25s ease;
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
 }
+
 
 .frame-footer svg:hover {
   color: #00b7ff;
 
-  transform: scale(1.15);
+  transform: scale(1.12);
 }
 
 
-/* ===========================
-   POST CAPTION
-=========================== */
+.frame-footer .liked-icon {
+  color: #ff3040;
+}
+
+
+/* ================================================= */
+/* POST CAPTION */
+/* ================================================= */
+
 .post-caption {
   position: absolute;
 
   left: 0;
+
   right: 0;
+
   bottom: 0;
 
   min-height: 90px;
@@ -673,6 +580,7 @@
   z-index: 8;
 }
 
+
 .post-caption strong {
   display: inline;
 
@@ -685,6 +593,7 @@
   margin-right: 6px;
 }
 
+
 .post-caption span {
   display: inline;
 
@@ -695,20 +604,44 @@
   line-height: 1.5;
 }
 
-/* ===========================
-   NAVIGATION BUTTONS
-=========================== */
+
+/* ================================================= */
+/* SIDE POST LOOK */
+/* ================================================= */
+
+.side-post {
+  border-color:
+    rgba(120, 180, 255, 0.12);
+
+  box-shadow:
+    0 15px 40px
+      rgba(0, 0, 0, 0.45);
+}
+
+
+/* ================================================= */
+/* NAVIGATION BUTTONS */
+/* ================================================= */
 
 .nav-btn {
+  position: absolute;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
   width: 56px;
 
   height: 56px;
 
-  border: 1px solid rgba(120, 180, 255, 0.18);
+  border:
+    1px solid
+    rgba(120, 180, 255, 0.18);
 
   border-radius: 50%;
 
-  background: rgba(10, 18, 34, 0.75);
+  background:
+    rgba(10, 18, 34, 0.8);
 
   color: white;
 
@@ -716,39 +649,48 @@
 
   cursor: pointer;
 
-  transition: 0.3s ease;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
 
   backdrop-filter: blur(15px);
 
   box-shadow:
-    0 0 15px rgba(0, 183, 255, 0.08);
+    0 0 15px
+      rgba(0, 183, 255, 0.08);
 
-  flex-shrink: 0;
+  z-index: 20;
 }
+
 
 .nav-btn:hover {
   background: #00b7ff;
 
   color: #04111f;
 
-  transform: scale(1.08);
+  transform:
+    translateY(-50%)
+    scale(1.08);
 }
+
 
 .left-btn {
-  margin-right: 10px;
+  left: 5%;
 }
+
 
 .right-btn {
-  margin-left: 10px;
+  right: 5%;
 }
 
 
-/* ===========================
-   DOTS
-=========================== */
+/* ================================================= */
+/* DOTS */
+/* ================================================= */
 
 .dots {
-  margin-top: 45px;
+  margin-top: 35px;
 
   display: flex;
 
@@ -757,7 +699,12 @@
   align-items: center;
 
   gap: 10px;
+
+  position: relative;
+
+  z-index: 10;
 }
+
 
 .dot {
   width: 10px;
@@ -768,12 +715,16 @@
 
   border-radius: 50%;
 
-  background: rgba(255, 255, 255, 0.25);
+  background:
+    rgba(255, 255, 255, 0.25);
 
   cursor: pointer;
 
-  transition: 0.3s ease;
+  transition:
+    width 0.3s ease,
+    background 0.3s ease;
 }
+
 
 .active-dot {
   width: 36px;
@@ -789,52 +740,102 @@
 }
 
 
-/* ===========================
-   RESPONSIVE
-=========================== */
+/* ================================================= */
+/* RESPONSIVE */
+/* ================================================= */
 
 @media (max-width: 1200px) {
 
-  .events-wrapper {
-    gap: 25px;
+  .carousel-post {
+    width: 360px;
+
+    height: 570px;
+
+    margin-left: -180px;
   }
 
-  .preview-card {
-    width: 240px;
+  .instagram-post {
+    width: 360px;
+
+    height: 570px;
   }
 
-  .instagram-frame {
-    width: 380px;
-
-    height: 690px;
+  .instagram-carousel {
+    max-width: 950px;
   }
 
+  .nav-btn {
+    width: 50px;
+
+    height: 50px;
+  }
+
+  .left-btn {
+    left: 2%;
+  }
+
+  .right-btn {
+    right: 2%;
+  }
 }
 
+
+/* ================================================= */
+/* TABLET */
+/* ================================================= */
 
 @media (max-width: 900px) {
 
-  .preview-card {
-    display: none;
-  }
-
   .events-wrapper {
-    gap: 15px;
+    height: 620px;
   }
 
-  .instagram-frame {
-    width: 360px;
+  .instagram-carousel {
+    width: 100%;
 
-    height: 660px;
+    height: 600px;
   }
 
+  /*
+    On smaller screens only center is visible.
+  */
+
+  .carousel-post:not(:has(.center-post)) {
+    opacity: 0 !important;
+
+    pointer-events: none;
+  }
+
+  .nav-btn {
+    width: 48px;
+
+    height: 48px;
+
+    font-size: 20px;
+  }
+
+  .left-btn {
+    left: 15px;
+  }
+
+  .right-btn {
+    right: 15px;
+  }
 }
 
+
+/* ================================================= */
+/* MOBILE */
+/* ================================================= */
 
 @media (max-width: 600px) {
 
   .events-section {
     padding: 70px 20px;
+  }
+
+  .events-heading {
+    margin-bottom: 40px;
   }
 
   .events-heading h2 {
@@ -847,37 +848,83 @@
     font-size: 0.9rem;
   }
 
-  .instagram-frame {
-    width: 95%;
+  .events-wrapper {
+    height: 600px;
+  }
 
-    height: 620px;
+  .carousel-post {
+    width: 340px;
+
+    height: 540px;
+
+    margin-left: -170px;
+  }
+
+  .instagram-post {
+    width: 340px;
+
+    height: 540px;
+
+    border-radius: 24px;
+  }
+
+  .poster-window {
+    height: 350px;
+  }
+
+  .frame-footer {
+    top: 410px;
   }
 
   .nav-btn {
-    width: 48px;
+    width: 44px;
 
-    height: 48px;
+    height: 44px;
 
-    font-size: 20px;
+    font-size: 18px;
   }
 
+  .left-btn {
+    left: 5px;
+  }
+
+  .right-btn {
+    right: 5px;
+  }
 }
 
-/* ===========================
-   CENTER EVENT TEXT
-=========================== */
+/* ================================================= */
+/* CENTER POST - BIGGER TEXT */
+/* ================================================= */
 
-.center-poster .event-preview-content .preview-label {
-  font-size: 14px;
+.center-post .event-preview-content h2 {
+  font-size: 32px;
   letter-spacing: 3px;
 }
 
-.center-poster .event-preview-content h2 {
-  font-size: 35px;
-  letter-spacing: 4px;
+.center-post .event-preview-content .preview-label {
+  font-size: 12px;
+  letter-spacing: 3px;
 }
 
-.center-poster .event-preview-content .hover-text {
-  font-size: 11px;
+.center-post .event-preview-content .hover-text {
+  font-size: 10px;
   letter-spacing: 2px;
+}
+
+/* ================================================= */
+/* CENTER POSTER - ALWAYS VISIBLE */
+/* ================================================= */
+
+.center-direct-poster {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
 }

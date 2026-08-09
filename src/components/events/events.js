@@ -1,7 +1,9 @@
 import webinarPoster from "./posters/webinar.PNG";
 import xenithPoster from "./posters/xenith.PNG";
-import techBlocksPoster from "./posters/tbnew.jpg";
-import workshopsPoster from "./posters/workshop.PNG";
+import techBlocksPoster from "./posters/techblocks.jpg";
+import workshopsPoster from "./posters/workshop.jpeg";
+import researchPoster from "./posters/research_forum.jpeg";
+import luminaPoster from "./posters/lumina.PNG";
 
 const events = [
   {
@@ -24,11 +26,11 @@ const events = [
 
   {
     id: 3,
-    title: "QUIZZES",
+    title: "RESEARCH FORUM",
     description:
-      "Challenge your technical knowledge, compete with peers, and win exciting prizes.",
+      "An immersive 2-day research paper writing workshop designed to introduce students to the world of academic research and scholarly writing.",
     accent: "#EC4899",
-    image: workshopsPoster, // Temporary
+    image: researchPoster,
   },
 
   {
@@ -56,6 +58,15 @@ const events = [
       "Our flagship technical festival featuring competitions, workshops, and innovation.",
     accent: "#2563EB",
     image: xenithPoster,
+  },
+
+  {
+    id: 7,
+    title: "LUMINA",
+    description:
+      "A creative and engaging event bringing together ideas, innovation, and exciting experiences.",
+    accent: "#F59E0B",
+    image: luminaPoster,
   },
 ];
 

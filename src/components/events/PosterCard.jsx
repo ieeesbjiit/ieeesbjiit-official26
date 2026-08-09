@@ -1,44 +1,167 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
 
-const PosterCard = ({ event, compact = false, center = false }) => {
+import {
+  FaRegHeart,
+  FaHeart,
+  FaRegComment,
+  FaRegBookmark,
+  FaBookmark,
+} from "react-icons/fa";
+
+import { FiSend } from "react-icons/fi";
+
+import ieeeLogo from "../../assets/ieee_white.png";
+
+const PosterCard = ({ event, center = false }) => {
+  const [liked, setLiked] = useState(false);
+  const [saved, setSaved] = useState(false);
+
   return (
-    <motion.div
-      className={`poster-card ${compact ? "compact" : "main"}`}
-      whileHover={{
-        scale: 1.02,
-      }}
-      transition={{
-        duration: 0.3,
-      }}
+    <div
+      className={`instagram-post ${
+        center ? "center-post" : "side-post"
+      }`}
     >
 
-      {/* Event information shown normally */}
+      {/* HEADER */}
 
-      <div className="event-preview-content">
+      <div className="frame-header">
 
-        <span className="preview-label">
-          IEEE EVENT
-        </span>
+        <div className="profile">
 
-        <h2>{event.title}</h2>
+          <img
+            src={ieeeLogo}
+            alt="IEEE SB JIIT"
+            className="profile-pic"
+          />
 
-        {!center && <p>{event.description}</p>}
+          <div className="profile-info">
+            <h4>IEEE SB JIIT</h4>
 
-        <span className="hover-text">
+            <span>
+              @ieeesbjiit
+            </span>
+          </div>
+
+        </div>
+
+        <span className="menu">
+          •••
         </span>
 
       </div>
 
 
-      {/* Poster appears on hover */}
+      {/* POSTER AREA */}
 
-      <img
-        src={event.image}
-        alt={event.title}
-        className="hover-poster"
-      />
+     <div className="poster-window">
 
-    </motion.div>
+          {center ? (
+
+            /* CENTER → DIRECT POSTER */
+
+            <img
+              src={event.image}
+              alt={event.title}
+              className="event-poster center-direct-poster"
+            />
+
+          ) : (
+
+            /* LEFT + RIGHT → HOVER */
+
+            <>
+              <div className="event-preview-content">
+
+                <span className="preview-label">
+                  IEEE EVENT
+                </span>
+
+                <h2>
+                  {event.title}
+                </h2>
+
+                <p>
+                  {event.description}
+                </p>
+
+                <span className="hover-text">
+                  HOVER TO EXPLORE
+                </span>
+
+              </div>
+
+              <img
+                src={event.image}
+                alt={event.title}
+                className="hover-poster"
+              />
+            </>
+
+          )}
+
+        </div>
+
+      {/* FOOTER */}
+
+      <div className="frame-footer">
+
+        <div className="footer-icons">
+
+          {liked ? (
+
+            <FaHeart
+              className="liked-icon"
+              onClick={() => setLiked(false)}
+            />
+
+          ) : (
+
+            <FaRegHeart
+              onClick={() => setLiked(true)}
+            />
+
+          )}
+
+          <FaRegComment />
+
+          <FiSend />
+
+        </div>
+
+
+        {saved ? (
+
+          <FaBookmark
+            onClick={() => setSaved(false)}
+          />
+
+        ) : (
+
+          <FaRegBookmark
+            onClick={() => setSaved(true)}
+          />
+
+        )}
+
+      </div>
+
+
+      {/* CAPTION */}
+
+      <div className="post-caption">
+
+        <strong>
+          {event.title}
+        </strong>
+
+        <span>
+          {event.description}
+        </span>
+
+      </div>
+
+    </div>
   );
 };
 
