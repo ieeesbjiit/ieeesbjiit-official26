@@ -353,6 +353,7 @@
   z-index: 20;
 }
 
+
 .event-preview-content {
   position: absolute;
 
@@ -860,4 +861,23 @@
     font-size: 20px;
   }
 
+}
+
+/* ===========================
+   CENTER EVENT TEXT
+=========================== */
+
+.center-poster .event-preview-content .preview-label {
+  font-size: 14px;
+  letter-spacing: 3px;
+}
+
+.center-poster .event-preview-content h2 {
+  font-size: 35px;
+  letter-spacing: 4px;
+}
+
+.center-poster .event-preview-content .hover-text {
+  font-size: 11px;
+  letter-spacing: 2px;
 }

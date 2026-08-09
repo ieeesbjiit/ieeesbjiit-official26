@@ -166,6 +166,7 @@ useEffect(() => {
                 <PosterCard
                   event={current}
                   compact
+                  center
                 />
 
               </motion.div>

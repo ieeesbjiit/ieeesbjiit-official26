@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-const PosterCard = ({ event, compact = false }) => {
+const PosterCard = ({ event, compact = false, center = false }) => {
   return (
     <motion.div
       className={`poster-card ${compact ? "compact" : "main"}`}
@@ -22,10 +22,9 @@ const PosterCard = ({ event, compact = false }) => {
 
         <h2>{event.title}</h2>
 
-        <p>{event.description}</p>
+        {!center && <p>{event.description}</p>}
 
         <span className="hover-text">
-          HOVER TO VIEW POSTER
         </span>
 
       </div>
