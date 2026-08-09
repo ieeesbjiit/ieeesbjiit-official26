@@ -12,6 +12,7 @@ const Navbar = () => {
         "highlights",
         "about",
         "events",
+        "wie",   
         "team",
         "gallery",
         "contact",
