@@ -1,65 +1,94 @@
 import { useState, useEffect } from "react";
-
-import { AnimatePresence, motion } from "framer-motion";
-import {
-  FaRegHeart,
-  FaHeart,
-  FaRegComment,
-  FaRegBookmark,
-} from "react-icons/fa";
-import { FiSend } from "react-icons/fi";
+import { motion } from "framer-motion";
 
 import "./events.css";
 import events from "./events";
 import PosterCard from "./PosterCard";
-import ieeeLogo from "../../assets/ieee_white.png";
 
 const Events = () => {
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState(1);
-const [liked, setLiked] = useState(false);
+
+  /* ========================= */
+  /* NEXT */
+  /* ========================= */
 
   const nextSlide = () => {
     setDirection(1);
-    setActive((prev) => (prev + 1) % events.length);
+
+    setActive(
+      (prev) => (prev + 1) % events.length
+    );
   };
+
+
+  /* ========================= */
+  /* PREVIOUS */
+  /* ========================= */
 
   const prevSlide = () => {
     setDirection(-1);
+
     setActive(
       (prev) =>
         (prev - 1 + events.length) %
         events.length
     );
   };
-useEffect(() => {
-  const interval = setInterval(() => {
-    nextSlide();
-  }, 5000);
 
-  return () => clearInterval(interval);
-}, [active]);
 
-  const previous =
-    events[
-      (active - 1 + events.length) %
-        events.length
-    ];
+  /* ========================= */
+  /* AUTO SLIDE */
+  /* ========================= */
 
-  const current = events[active];
+  useEffect(() => {
 
-  const next =
-    events[
-      (active + 1) %
-        events.length
-    ];
+    const interval = setInterval(() => {
+
+      setDirection(1);
+
+      setActive(
+        (prev) =>
+          (prev + 1) % events.length
+      );
+
+    }, 5000);
+
+    return () => clearInterval(interval);
+
+  }, []);
+
+
+  /* ========================= */
+  /* FIND POSITION */
+  /* ========================= */
+
+  const getOffset = (index) => {
+
+    let offset =
+      (index - active + events.length) %
+      events.length;
+
+    if (offset > events.length / 2) {
+      offset -= events.length;
+    }
+
+    return offset;
+  };
+
 
   return (
     <section id="events" className="events-section">
 
+      {/* ========================= */}
+      {/* HEADING */}
+      {/* ========================= */}
+
       <div className="events-heading">
 
-        <h2>EVENTS</h2>
+        <h2>
+          EVENTS
+        </h2>
 
         <p>
           Discover the experiences that define
@@ -68,6 +97,11 @@ useEffect(() => {
 
       </div>
 
+
+      {/* ========================= */}
+      {/* CAROUSEL */}
+      {/* ========================= */}
+
       <div className="events-wrapper">
 
         {/* LEFT BUTTON */}
@@ -75,186 +109,153 @@ useEffect(() => {
         <button
           className="nav-btn left-btn"
           onClick={prevSlide}
+          aria-label="Previous event"
         >
           &#10094;
         </button>
 
-        {/* LEFT POSTER */}
 
-        <motion.div 
-          className="preview-card left-preview"
-          layout
-          transition={{
-            type: "spring",
-            stiffness: 120,
-            damping: 18,
-          }}
-        >
+        {/* ========================= */}
+        {/* ALL INSTAGRAM POSTS */}
+        {/* ========================= */}
 
-          <PosterCard
-            event={previous}
-            compact
-          />
+        <div className="instagram-carousel">
 
-        </motion.div>
+          {events.map((event, index) => {
 
-        {/* INSTAGRAM */}
+            const offset = getOffset(index);
 
-        <div className="instagram-frame">
+            let position;
 
-          {/* HEADER */}
+            /* CENTER */
 
-          <div className="frame-header">
+            if (offset === 0) {
 
-            <div className="profile">
+              position = {
+                x: 0,
+                scale: 1,
+                opacity: 1,
+                zIndex: 5,
+                filter: "brightness(1)",
+              };
 
-              <img
-  src={ieeeLogo}
-  alt="IEEE SB JIIT"
-  className="profile-pic"
-/>
+            }
 
-              <div className="profile-info">
+            /* LEFT */
 
-                <h4>IEEE SB JIIT</h4>
+             else if (offset === -1) {
 
-                <span>@ieeesbjiit</span>
+                position = {
+                  x: -360,
+                  scale: 0.78,
+                  opacity: 0.58,
+                  zIndex: 3,
+                  filter: "brightness(0.62)",
+                };
 
-              </div>
+              }
 
-            </div>
+            /* RIGHT */
 
-            <span className="menu">
-              •••
-            </span>
+            else if (offset === 1) {
 
-          </div>
+              position = {
+                x: 360,
+                scale: 0.78,
+                opacity: 0.58,
+                zIndex: 3,
+                filter:
+                  "brightness(0.68)",
+              };
 
-          {/* POSTER WINDOW */}
+            }
 
-          <div className="poster-window">
+            /* HIDDEN */
 
-            <AnimatePresence
-              mode="wait"
-              initial={false}
-            >
+           else {
 
-              <motion.div custom={direction}
-                key={current.title}
-                className="center-poster"
-                initial={(direction) => ({
-                  x: direction > 0 ? 250 : -250,
-                  opacity: 0,
-                })}
+              position = {
+                x: offset < 0 ? -700 : 700,
+                scale: 0.7,
+                opacity: 0,
+                zIndex: 1,
+                filter: "brightness(0.5)",
+              };
 
-                animate={{
-                  x: 0,
-                  opacity: 1,
+            }
+
+
+            return (
+              <motion.div
+                key={event.title}
+                className="carousel-post"
+                animate={position}
+
+                transition={{
+                  duration: 0.65,
+                  ease: [0.22, 1, 0.36, 1],
                 }}
-
-                exit={(direction) => ({
-                  x: direction > 0 ? -250 : 250,
-                  opacity: 0,
-                })}
-               transition={{
-                duration: 0.25,
-                ease: "easeOut",
-              }}
               >
 
                 <PosterCard
-                  event={current}
+                  event={event}
+                  center={offset === 0}
                 />
 
               </motion.div>
+            );
 
-            </AnimatePresence>
-
-          </div>
-
-                    {/* FOOTER */}
-
-          <div className="frame-footer">
-
-            <div className="footer-icons">
-
-              {liked ? (
-  <FaHeart
-    onClick={() => setLiked(false)}
-    style={{
-      color: "#ff3040",
-      cursor: "pointer",
-      transition: "0.3s ease",
-      transform: "scale(1.15)"
-    }}
-  />
-) : (
-  <FaRegHeart
-    onClick={() => setLiked(true)}
-    style={{
-      color: "white",
-      cursor: "pointer",
-      transition: "0.3s ease"
-    }}
-  />
-)}
-
-              <FaRegComment />
-
-              <FiSend />
-
-            </div>
-
-            <FaRegBookmark />
-
-          </div>
+          })}
 
         </div>
 
-        {/* RIGHT POSTER */}
-
-        <motion.div
-          className="preview-card right-preview"
-          layout
-          transition={{
-            type: "spring",
-            stiffness: 120,
-            damping: 18,
-          }}
-        >
-
-          <PosterCard
-            event={next}
-            compact
-          />
-
-        </motion.div>
 
         {/* RIGHT BUTTON */}
 
         <button
           className="nav-btn right-btn"
           onClick={nextSlide}
+          aria-label="Next event"
         >
           &#10095;
         </button>
 
       </div>
 
+
+      {/* ========================= */}
       {/* DOTS */}
+      {/* ========================= */}
 
       <div className="dots">
 
-        {events.map((_, index) => (
+        {events.map((event, index) => (
 
           <button
-            key={index}
-            onClick={() => setActive(index)}
+            key={event.title || index}
             className={
               active === index
                 ? "dot active-dot"
                 : "dot"
             }
+
+            onClick={() => {
+
+              if (index === active) {
+                return;
+              }
+
+              setDirection(
+                index > active
+                  ? 1
+                  : -1
+              );
+
+              setActive(index);
+
+            }}
+
+            aria-label={`Go to ${event.title}`}
           />
 
         ))}
