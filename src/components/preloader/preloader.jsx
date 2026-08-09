@@ -25,9 +25,9 @@ const CAMERA_FOV_DEG = 32;
 
 const MIN_DISPLAY_TIME_MS = 5000;
 
-// Weight distribution: how much each portion contributes to total progress
-const WEIGHT_MODEL = 0.3;    // 30% for 3D model
-const WEIGHT_MEDIA = 0.7;    // 70% for images + videos
+// Weight distribution for progress bar
+const WEIGHT_MODEL = 0.2;    // 20% — model loads first
+const WEIGHT_MEDIA = 0.8;    // 80% — rest is media
 
 function Preloader({ onComplete }) {
   const canvasWrapRef = useRef(null);
@@ -43,9 +43,9 @@ function Preloader({ onComplete }) {
     let rafId;
     let disposed = false;
 
-    // ---------- Combined progress state ----------
-    let modelProgress = 0;   // 0-100
-    let mediaProgress = 0;   // 0-100
+    // ---------- Progress state ----------
+    let modelProgress = 0;
+    let mediaProgress = 0;
     let modelDone = false;
     let mediaDone = false;
 
@@ -151,19 +151,7 @@ function Preloader({ onComplete }) {
       updateProgress();
     };
 
-    // ---------- Preload media (images + videos) in parallel ----------
-    const mediaSources = getAllMediaSources();
-    preloadMedia(mediaSources, (percent) => {
-      mediaProgress = percent;
-      updateProgress();
-    }).then(() => {
-      mediaDone = true;
-      mediaProgress = 100;
-      updateProgress();
-      checkComplete();
-    });
-
-    // ---------- Safety net — cap at 12s ----------
+    // ---------- Safety net — cap at 15s ----------
     const safetyTimer = setTimeout(() => {
       modelDone = true;
       mediaDone = true;
@@ -171,7 +159,7 @@ function Preloader({ onComplete }) {
       mediaProgress = 100;
       updateProgress();
       checkComplete();
-    }, 12000);
+    }, 15000);
 
     // ---------- Completion check ----------
     const checkComplete = () => {
@@ -185,6 +173,30 @@ function Preloader({ onComplete }) {
           if (onComplete) onComplete();
         }, 600);
       }, remaining);
+    };
+
+    // ---------- Start media preload AFTER model finishes ----------
+    const startMediaPreload = () => {
+      if (disposed) return;
+      const mediaSources = getAllMediaSources();
+
+      if (mediaSources.length === 0) {
+        mediaDone = true;
+        mediaProgress = 100;
+        updateProgress();
+        checkComplete();
+        return;
+      }
+
+      preloadMedia(mediaSources, (percent) => {
+        mediaProgress = percent;
+        updateProgress();
+      }).then(() => {
+        mediaDone = true;
+        mediaProgress = 100;
+        updateProgress();
+        checkComplete();
+      });
     };
 
     // ---------- Swim-bend shader ----------
@@ -225,7 +237,7 @@ function Preloader({ onComplete }) {
       bendUniformsList.push(uniforms);
     }
 
-    // ---------- Load model ----------
+    // ---------- Load model FIRST ----------
     const loader = new GLTFLoader(manager);
     loader.setMeshoptDecoder(MeshoptDecoder);
     loader.load(
@@ -288,22 +300,25 @@ function Preloader({ onComplete }) {
           modelDone = true;
           modelProgress = 100;
           updateProgress();
-          checkComplete();
+
+          // ✅ Model finished — now start media preload
+          startMediaPreload();
         } catch (setupErr) {
           console.error('Post-load setup error:', setupErr);
           modelDone = true;
           modelProgress = 100;
           updateProgress();
-          checkComplete();
+          startMediaPreload();
         }
       },
       undefined,
       (err) => {
         console.error('Model failed to load:', err);
+        // Model failed — proceed to media anyway
         modelDone = true;
         modelProgress = 100;
         updateProgress();
-        checkComplete();
+        startMediaPreload();
       }
     );
 
@@ -373,7 +388,7 @@ function Preloader({ onComplete }) {
   }, [onComplete]);
 
   return (
-    <div className={preloader ${fadeOut ? 'preloader--fade-out' : ''}}>
+    <div className={`preloader ${fadeOut ? 'preloader--fade-out' : ''}`}>
       <div className="preloader__brandmark">
         IEEE&nbsp;·&nbsp;JIIT&nbsp;STUDENT&nbsp;BRANCH
       </div>
