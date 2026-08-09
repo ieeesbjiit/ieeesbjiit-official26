@@ -16,7 +16,6 @@ function TeamCard({
   const [tilt, setTilt] = useState({ rx: 0, ry: 0, mx: 50, my: 50 });
   const cardRef = useRef(null);
 
-  // Detect if device is touch-only
   const [isTouch, setIsTouch] = useState(false);
   useEffect(() => {
     const mq = window.matchMedia('(hover: none)');
@@ -54,15 +53,12 @@ function TeamCard({
     setTilt({ rx: 0, ry: 0, mx: 50, my: 50 });
   };
 
-  // Touch tap toggle handler
   const handleClick = (e) => {
     if (!isTouch) return;
-    // Don't toggle if clicking the LinkedIn link
     if (e.target.closest('.team-card__social-btn')) return;
     onToggle();
   };
 
-  // Effective hover state: hover on desktop, tap-active on touch
   const isEffectivelyHovered = isTouch ? isActive : hovered;
 
   const wrapperStyle = {
@@ -112,15 +108,12 @@ function TeamCard({
         onMouseLeave={handleMouseLeave}
         onClick={handleClick}
       >
-      <div className="team-card__photo-mask">
         <img
           src={member.img}
           alt=""
           aria-hidden="true"
           className="team-card__photo"
         />
-      </div>
-        
 
         <div className="team-card__glare" style={glareStyle} />
 
@@ -130,8 +123,6 @@ function TeamCard({
           <p className="team-card__name">{member.name}</p>
           <p className="team-card__role">{member.role}</p>
         </div>
-
-        <div className="team-card__index">{index + 1}</div>
 
         {member.cutout && (
           <img
