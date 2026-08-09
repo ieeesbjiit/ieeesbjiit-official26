@@ -10,9 +10,13 @@ div.landing {
     display: flex;
     flex-direction: row;
     background-color: black !important;
-    height: 100vh;
+    min-height: 100vh;
+    min-height: 100svh;
     align-items: center !important;
-    justify-content: space-evenly !important;
+    justify-content: center !important;
+    gap: clamp(2rem, 8vw, 10rem);
+    padding-inline: clamp(1.5rem, 4vw, 5rem);
+    box-sizing: border-box;
     position: relative;
     isolation: isolate;
     overflow: hidden;
@@ -36,19 +40,20 @@ div.landing {
     position: relative;
     z-index: 1;
     color: white;
-    font-size: 4rem;
+    font-size: clamp(2.5rem, 5vw, 4rem);
     font-family: 'Inter', sans-serif;
     font-weight: 800;
-    padding-left: 2rem;
+    max-width: 18ch;
 }
 
 .landingLeft > .subtitle {
     position: relative;
     z-index: 1;
     color: white;
-    font-size: 2rem;
+    font-size: clamp(1.35rem, 2.5vw, 2rem);
     font-family: 'Source Serif 4', serif;
-    padding-left: 2rem;
+    margin-top: 0.5rem;
+    max-width: 26ch;
 }
 
 .subtitle > em {
@@ -89,4 +94,82 @@ div.landing {
     position: relative;
     filter: grayscale(1) brightness(5);
     -webkit-filter: grayscale(1) brightness(5);
+}
+
+.landingRight {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.75rem, 2vw, 1.5rem);
+    position: relative;
+    z-index: 1;
+}
+
+.landingRight > img {
+    position: relative;
+    z-index: 1;
+    width: clamp(150px, 18vw, 230px);
+    height: auto;
+}
+
+@media (max-width: 900px) {
+    div.landing {
+        flex-direction: column;
+        justify-content: center !important;
+        gap: clamp(1.25rem, 4vh, 2rem);
+        padding: 5rem clamp(2rem, 7vw, 4rem) 2rem;
+        text-align: center;
+    }
+    
+    .landingRight {
+        display: contents;
+    }
+
+    .ieeevideo {
+        order: 1;
+        width: clamp(180px, 52vw, 245px);
+    }
+
+    .landingLeft {
+        order: 2;
+        position: relative;
+        z-index: 1;
+    }
+
+    .landingLeft > .title,
+    .landingLeft > .subtitle {
+        max-width: none;
+        padding: 0;
+    }
+
+    .landingLeft > .title {
+        font-size: clamp(2.2rem, 10vw, 3.5rem);
+        line-height: 1.08;
+    }
+
+    .landingLeft > .subtitle {
+        font-size: clamp(1.2rem, 5.5vw, 1.7rem);
+        line-height: 1.3;
+        margin-top: 0.75rem;
+    }
+
+    .landingRight > img {
+        order: 3;
+        width: clamp(125px, 38vw, 180px);
+    }
+}
+
+@media (max-height: 620px) and (max-width: 900px) {
+    div.landing {
+        gap: 0.85rem;
+        padding-top: 3.75rem;
+    }
+
+    .ieeevideo {
+        width: clamp(145px, 35vh, 210px);
+    }
+
+    .landingRight > img {
+        width: clamp(105px, 25vh, 145px);
+    }
 }

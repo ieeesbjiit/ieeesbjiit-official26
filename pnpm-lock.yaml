@@ -12,7 +12,7 @@ importers:
         specifier: ^4.3.3
         version: 4.3.3(vite@8.1.5(jiti@2.7.0))
       framer-motion:
-        specifier: ^12.42.2
+        specifier: ^12.43.0
         version: 12.43.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       lucide-react:
         specifier: ^1.26.0
