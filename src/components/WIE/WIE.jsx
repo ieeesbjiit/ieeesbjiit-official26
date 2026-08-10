@@ -10,7 +10,7 @@ import slide5 from "./images/slide5.jpg";
 
 const FACE_COUNT = 5;
 const ANGLE_STEP = 360 / FACE_COUNT;
-const ROTATE_EVERY = 3600;
+const ROTATE_EVERY = 5000;
 const BASELINE_WIDTH = 220; 
 
 const SLIDES = [
@@ -71,16 +71,17 @@ function WIE() {
   const handleDotClick = useCallback(
     (index) => {
       goToIndex(index);
-
-  
       clearInterval(autoplayTimerRef.current);
-      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (!reducedMotion) {
-        autoplayTimerRef.current = setInterval(goToNext, ROTATE_EVERY);
-      }
+      autoplayTimerRef.current = setInterval(goToNext, ROTATE_EVERY);
     },
     [goToIndex, goToNext]
   );
+
+  const handleStageClick = useCallback(() => {
+    goToNext();
+    clearInterval(autoplayTimerRef.current);
+    autoplayTimerRef.current = setInterval(goToNext, ROTATE_EVERY);
+  }, [goToNext]);
 
   
   useEffect(() => {
@@ -158,17 +159,15 @@ function WIE() {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     function startAutoplay() {
-      if (reducedMotion) return;
       autoplayTimerRef.current = setInterval(goToNext, ROTATE_EVERY);
     }
-
     function stopAutoplay() {
       clearInterval(autoplayTimerRef.current);
     }
 
-  
     const HOVER_SCALE = 1.035;
     let rafPending = false;
+
     function handleMouseMove(e) {
       if (rafPending) return;
       rafPending = true;
@@ -182,18 +181,13 @@ function WIE() {
       });
     }
 
-    function resetTilt() {
-      stage.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
-    }
-
     function handleMouseEnter() {
       stopAutoplay();
-    
       stage.style.transform = `rotateX(0deg) rotateY(0deg) scale(${HOVER_SCALE})`;
     }
 
     function handleMouseLeave() {
-      resetTilt();
+      stage.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
       startAutoplay();
     }
 
@@ -250,9 +244,13 @@ function WIE() {
           <div
             className="wie-stage"
             ref={stageRef}
+            onClick={handleStageClick}
+            role="button"
+            aria-label="Next photo"
             style={{
               perspective: `${geometry.perspective}px`,
               "--car-scale": geometry.scale,
+              cursor: "pointer",
             }}
           >
             <div
