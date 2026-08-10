@@ -10,7 +10,6 @@ import slide5 from "./images/slide5.jpg";
 
 const FACE_COUNT = 5;
 const ANGLE_STEP = 360 / FACE_COUNT;
-const ROTATE_EVERY = 5000;
 const BASELINE_WIDTH = 220; 
 
 const SLIDES = [
@@ -39,7 +38,6 @@ const TAGLINE_PAUSE_MS = 250;
 
 function WIE() {
   const stageRef = useRef(null);
-  const autoplayTimerRef = useRef(null);
 
   
   const [carousel, setCarousel] = useState({ currentIndex: 3, cumulativeAngle: -216 });
@@ -71,16 +69,12 @@ function WIE() {
   const handleDotClick = useCallback(
     (index) => {
       goToIndex(index);
-      clearInterval(autoplayTimerRef.current);
-      autoplayTimerRef.current = setInterval(goToNext, ROTATE_EVERY);
     },
-    [goToIndex, goToNext]
+    [goToIndex]
   );
 
   const handleStageClick = useCallback(() => {
     goToNext();
-    clearInterval(autoplayTimerRef.current);
-    autoplayTimerRef.current = setInterval(goToNext, ROTATE_EVERY);
   }, [goToNext]);
 
   
@@ -158,12 +152,6 @@ function WIE() {
     const isPointerFine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    function startAutoplay() {
-      autoplayTimerRef.current = setInterval(goToNext, ROTATE_EVERY);
-    }
-    function stopAutoplay() {
-      clearInterval(autoplayTimerRef.current);
-    }
 
     const HOVER_SCALE = 1.035;
     let rafPending = false;
@@ -182,16 +170,14 @@ function WIE() {
     }
 
     function handleMouseEnter() {
-      stopAutoplay();
       stage.style.transform = `rotateX(0deg) rotateY(0deg) scale(${HOVER_SCALE})`;
     }
 
     function handleMouseLeave() {
       stage.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
-      startAutoplay();
     }
 
-    startAutoplay();
+    // autoplay disabled — manual navigation only
 
     if (isPointerFine && !reducedMotion) {
       stage.addEventListener("mousemove", handleMouseMove);
@@ -200,7 +186,6 @@ function WIE() {
     }
 
     return () => {
-      stopAutoplay();
       if (isPointerFine && !reducedMotion) {
         stage.removeEventListener("mousemove", handleMouseMove);
         stage.removeEventListener("mouseenter", handleMouseEnter);
