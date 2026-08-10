@@ -190,7 +190,7 @@ function StackedDeckGallery({ photos = defaultPhotos }) {
   }, [activeIndex]);
 
   return (
-    <div className="deck-gallery-wrap">
+    <div  id= "gallery" className="deck-gallery-wrap">
       <div className="masthead">
         <div className="masthead-top">
           <div>
