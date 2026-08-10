@@ -19,30 +19,52 @@
 }
 
 .wie-section .wie-card {
-  width: 1180px;
+  width: 1340px; 
   max-width: 100%;
   background: linear-gradient(
     135deg,
-    rgba(16, 27, 74, 0.62) 0%,
-    rgba(21, 32, 88, 0.58) 45%,
-    rgba(11, 19, 50, 0.66) 100%
+    rgba(14, 24, 68, 0.66) 0%,
+    rgba(19, 29, 82, 0.62) 45%,
+    rgba(10, 17, 46, 0.7) 100%
   );
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(190, 205, 255, 0.14);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(190, 205, 255, 0.12);
   border-radius: 32px;
-  padding: 66px 80px;
+  padding: 64px 64px; 
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 56px; 
+  gap: 40px;
   overflow: hidden; 
   position: relative;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07) inset, 0 0 0 1px rgba(255, 255, 255, 0.025) inset,
-    0 18px 40px -18px rgba(0, 0, 8, 0.45);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 0 0 1px rgba(255, 255, 255, 0.02) inset,
+    0 26px 52px -22px rgba(0, 0, 10, 0.5);
+}
+
+
+.wie-section .wie-card::before {
+  content: "";
+  position: absolute;
+  top: -25%;
+  left: -12%;
+  width: 75%;
+  height: 65%;
+  background: linear-gradient(
+    118deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.015) 45%,
+    transparent 72%
+  );
+  transform: rotate(-6deg);
+  z-index: 0;
+  pointer-events: none;
 }
 
 .wie-section .wie-content {
+  position: relative;
+  z-index: 1; 
   flex: 1 1 calc(50% - 28px);
   max-width: calc(50% - 28px);
   display: flex;
@@ -51,65 +73,192 @@
   min-width: 0;
 }
 
+
+.wie-section .wie-title-row {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  column-gap: 35px;
+  margin: 0 0 24px 0;
+}
+
+.wie-section .wie-heading-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: max-content;
+}
+
+.wie-section .wie-logo-wrap {
+  position: relative;
+  grid-column: 1;
+  align-self: center;
+  margin: 0 0 0 -12px;
+}
+
+.wie-section .wie-logo-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -34% -22%;
+  background: radial-gradient(
+    circle at 38% 42%,
+    rgba(125, 185, 255, 0.22) 0%,
+    rgba(90, 150, 255, 0.09) 42%,
+    transparent 70%
+  );
+  filter: blur(22px);
+  z-index: -1;
+  pointer-events: none;
+}
+
 .wie-section .wie-logo {
-  width: 233px;
+  width: 280px;
   height: auto;
   margin: 0 0 6px 0; 
   align-self: flex-start;
+  display: block;
+  margin: 0;
+  transform: scale(1.7);
+  transform-origin: center center;
+}
+
+.wie-section .wie-tagline {
+  display: flex;
+  align-items: baseline;
+  min-height: 32px; 
+  min-width: 165px; 
+  margin: 0; 
+  justify-content: center; 
+  font-family: "Times New Roman", Times, serif;
+  font-size: 22px;
+  letter-spacing: 0.05em;
+  color: rgba(210, 226, 255, 0.68);
+}
+
+.wie-section .wie-tagline-word {
+  font-weight: 700; 
+  color: rgba(232, 241, 255, 0.97);
+  text-shadow: 0 0 16px rgba(120, 175, 255, 0.4), 0 0 34px rgba(90, 150, 255, 0.16);
+}
+
+.wie-section .wie-tagline-caret {
+  display: inline-block;
+  width: 2px;
+  height: 0.9em;
+  margin-left: 4px;
+  background: rgba(232, 241, 255, 0.9);
+  animation: wie-caret-blink 1s steps(1) infinite;
+}
+
+@keyframes wie-caret-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
 }
 
 .wie-section .wie-heading {
   font-family: "Times New Roman", Times, serif;
-  font-size: 39px;
+  font-size: 42px;
   font-weight: 700;
-  line-height: 1.25;
+  line-height: 1.18;
   color: #ffffff;
-  letter-spacing: 0.01em;
-  margin-bottom: 18px;
+  letter-spacing: 0.015em;
+  margin-bottom: 12px;
+  white-space: nowrap;
 }
 
 .wie-section .wie-paragraph {
   font-family: "Times New Roman", Times, serif;
-  font-size: 16.5px;
+  font-size: 18px;
   font-weight: 400;
-  line-height: 1.65;
-  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.68;
+  color: rgba(255, 255, 255, 0.85);
   max-width: 480px;
 }
 
 .wie-section .wie-objectives {
   list-style: none;
-  margin: 20px 0 0 0;
+  margin: 22px 0 0 0;
   padding: 0;
   max-width: 480px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .wie-section .wie-objectives li {
   position: relative;
-  padding-left: 20px;
+  padding: 5px 10px 5px 22px;
+  margin: 0 -10px; 
+  border-radius: 8px;
   font-family: "Times New Roman", Times, serif;
-  font-size: 15px;
+  font-size: 16.5px;
   font-weight: 400;
-  line-height: 1.45;
-  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.8);
+  transition: color 0.22s ease, transform 0.22s ease;
 }
 
 .wie-section .wie-objectives li::before {
   content: "";
   position: absolute;
-  left: 0;
-  top: 0.55em;
-  width: 6px;
-  height: 6px;
+  left: 9px;
+  top: 50%;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  background: rgba(180, 200, 255, 0.55);
-  box-shadow: 0 0 6px rgba(150, 180, 255, 0.35);
+  transform: translateY(-50%);
+  background: rgba(180, 200, 255, 0.5);
+  box-shadow: 0 0 4px rgba(150, 180, 255, 0.3);
+  transition: width 0.25s ease, height 0.25s ease, border-radius 0.25s ease,
+    background 0.25s ease, box-shadow 0.25s ease;
+}
+
+
+.wie-section .wie-objectives li::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: linear-gradient(90deg, rgba(130, 180, 255, 0.1) 0%, rgba(130, 180, 255, 0) 75%);
+  border: 1px solid rgba(180, 205, 255, 0);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.22s ease, transform 0.22s ease, border-color 0.22s ease;
+  z-index: -1;
+  pointer-events: none;
+}
+
+
+@media (hover: hover) and (pointer: fine) {
+  .wie-section .wie-objectives li:hover {
+    color: rgba(255, 255, 255, 1);
+    transform: translateX(4px);
+  }
+
+  .wie-section .wie-objectives li:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+    border-color: rgba(180, 205, 255, 0.14);
+  }
+
+  .wie-section .wie-objectives li:hover::before {
+    width: 3px;
+    height: 15px;
+    border-radius: 2px;
+    background: linear-gradient(180deg, rgba(160, 205, 255, 0.95), rgba(120, 175, 255, 0.65));
+    box-shadow: 0 0 8px rgba(150, 190, 255, 0.6);
+  }
 }
 
 .wie-section .wie-carousel-wrap {
+  position: relative;
+  z-index: 1;
   flex: 1 1 calc(50% - 28px);
   max-width: calc(50% - 28px);
   min-width: 160px;
@@ -118,6 +267,23 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  transform: translateY(25px);
+}
+
+
+.wie-section .wie-carousel-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -16% -10%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(79, 168, 232, 0.2) 0%,
+    rgba(79, 168, 232, 0.07) 46%,
+    transparent 76%
+  );
+  filter: blur(40px);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .wie-section .wie-stage {
@@ -127,16 +293,38 @@
   transform: rotateX(0deg) rotateY(0deg);
   transition: transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
   will-change: transform;
+
+  width: min(74%, 380px); 
+   aspect-ratio: 1 / 1; 
+  transform: rotateX(0deg) rotateY(0deg) scale(1);
+  transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1), filter 0.4s ease;
+  will-change: transform;
+  
+  filter: drop-shadow(0 10px 22px rgba(0, 10, 30, 0.32)) drop-shadow(0 0 16px rgba(120, 180, 255, 0.12));
 }
+
+
+@media (hover: hover) and (pointer: fine) {
+  .wie-section .wie-stage:hover {
+    filter: drop-shadow(0 14px 30px rgba(0, 10, 30, 0.4)) drop-shadow(0 0 26px rgba(120, 180, 255, 0.22));
+  }
+}
+
 
 .wie-section .wie-stage::before {
   content: "";
   position: absolute;
-  left: -4%;
-  right: -4%;
-  bottom: -13%;
-  height: 16%;
-  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.38) 0%, rgba(0, 0, 0, 0) 75%);
+  left: -24%;
+  right: -24%;
+  bottom: -1%;
+  height: 9%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(2, 6, 20, 0.42) 0%,
+    rgba(2, 6, 20, 0.22) 38%,
+    rgba(2, 6, 20, 0.07) 68%,
+    rgba(2, 6, 20, 0) 100%
+  );
   filter: blur(calc(11px * var(--car-scale, 1)));
   z-index: -2;
   pointer-events: none;
@@ -155,7 +343,8 @@
   position: absolute;
   inset: 0;
   transform-style: preserve-3d;
-  transition: transform 1.15s cubic-bezier(0.65, 0, 0.35, 1);
+  
+  transition: transform 1.4s cubic-bezier(0.22, 0.61, 0.36, 1);
   will-change: transform;
 }
 
@@ -202,6 +391,7 @@
 .wie-section .wie-dots {
   position: relative;
   margin-top: 39px; 
+  margin-top: 54px; 
   display: flex;
   gap: 7px;
 }
@@ -227,6 +417,10 @@
   .wie-section .wie-stage {
     transition: none;
   }
+  .wie-section .wie-tagline-caret {
+    animation: none;
+    opacity: 1;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -242,7 +436,7 @@
     align-items: center;
     text-align: center;
   }
-  .wie-section .wie-logo {
+  .wie-section .wie-logo-wrap {
     align-self: center;
     margin-left: 0;
   }
@@ -271,5 +465,14 @@
   }
   .wie-section .wie-carousel-wrap {
     max-width: 100%;
+  }
+  .wie-section .wie-title-row {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    row-gap: 14px;
+  }
+  .wie-section .wie-logo-wrap {
+    grid-column: 1;
+    margin: 0;
   }
 }
