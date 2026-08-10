@@ -13,7 +13,7 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 64px 32px 96px;
-  background: var(--bg-base);
+  /* background: var(--bg-base); */
   color: var(--text);
   font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
 }
@@ -130,7 +130,7 @@
   position: absolute;
   top: 0; left: 0; right: 0;
   height: calc((100% - var(--card-h)) / 2);
-  background: var(--bg-base);
+  /* background: var(--bg-base); */
   z-index: 150;
   pointer-events: none;
 }

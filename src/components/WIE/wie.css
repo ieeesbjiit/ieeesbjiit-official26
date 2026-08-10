@@ -11,13 +11,13 @@
 .wie-section {
   width: 100%;
   min-height: 100vh;
-  font-family: "Times New Roman", Times, serif;
+  /* font-family: "Times New Roman", Times, serif; */
   display: flex;
   align-items: flex-start;
   justify-content: center;
   padding: 110px 24px 60px;
-  background: radial-gradient(circle at 20% 15%, rgba(79, 168, 232, 0.1) 0%, transparent 45%),
-    radial-gradient(circle at 85% 85%, rgba(79, 216, 255, 0.08) 0%, transparent 50%), #000023;
+  /* background: radial-gradient(circle at 20% 15%, rgba(79, 168, 232, 0.1) 0%, transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(79, 216, 255, 0.08) 0%, transparent 50%), #000023; */
 }
 
 .wie-section .wie-card {
