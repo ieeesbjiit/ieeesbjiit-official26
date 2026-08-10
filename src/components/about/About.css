@@ -164,7 +164,7 @@
 .particle {
   position: absolute;
   border-radius: 50%;
-  background: var(--ieee-blue);
+  /* background: var(--ieee-blue); */
   filter: blur(60px);
   opacity: 0.15;
   animation: float linear infinite;

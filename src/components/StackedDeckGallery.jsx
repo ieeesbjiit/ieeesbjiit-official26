@@ -201,7 +201,7 @@ function StackedDeckGallery({ photos = defaultPhotos }) {
             {String(activeIndex + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
           </p>
         </div>
-        <div className="masthead-rule" />
+        {/* <div className="masthead-rule" /> */}
       </div>
 
       <div className="gallery">

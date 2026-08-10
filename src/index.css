@@ -1,6 +1,6 @@
 @import "tailwindcss";
 body{
     background: url(/back.png) repeat-y;
-    background-size: contain;
-    /* background-position: center; */
+    background-size: auto 100%;
+    background-position: center;
 }
