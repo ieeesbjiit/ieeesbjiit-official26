@@ -42,7 +42,7 @@ function WIE() {
   const autoplayTimerRef = useRef(null);
 
   
-  const [carousel, setCarousel] = useState({ currentIndex: 0, cumulativeAngle: 0 });
+  const [carousel, setCarousel] = useState({ currentIndex: 3, cumulativeAngle: -216 });
 
   
   const [geometry, setGeometry] = useState({ radius: 0, perspective: 0, scale: 1 });
@@ -272,7 +272,6 @@ function WIE() {
               ))}
             </div>
           </div>
-
           <div className="wie-dots">
             {SLIDES.map((slide, i) => (
               <button
@@ -291,3 +290,6 @@ function WIE() {
 }
 
 export default WIE;
+
+
+
