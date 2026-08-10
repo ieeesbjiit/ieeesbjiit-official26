@@ -390,7 +390,7 @@ function Preloader({ onComplete }) {
   return (
     <div className={`preloader ${fadeOut ? 'preloader--fade-out' : ''}`}>
       <div className="preloader__brandmark">
-        IEEE&nbsp;·&nbsp;JIIT&nbsp;STUDENT&nbsp;BRANCH
+        IEEE&nbsp;·&nbsp;STUDENT&nbsp;BRANCH&nbsp;JIIT
       </div>
 
       <div className="preloader__canvas-wrap" ref={canvasWrapRef} />
