@@ -1,7 +1,7 @@
 import './Footer.css';
 import oceanFloor from './assets/ocean-floor.png';
 import ieeeLogo from '../../assets/ieee_white.png';
-
+import whatsappLogo from "./assets/whatsapp-svgrepo-com.svg";
 /* The first four links come from the public IEEE SB JIIT website. */
 const socialLinks = [
   { label: 'Instagram', href: 'https://www.instagram.com/ieeesbjiit/', icon: 'instagram' },
@@ -53,7 +53,15 @@ function Icon({ name }) {
     phone: <path className="icon-fill" d="M6.6 2.9 9.34 5.6 7.6 8.16c.79 1.63 2.1 2.94 3.73 3.73l2.56-1.74 2.71 2.74-1.79 3.2c-.33.58-.98.89-1.64.76C7.35 15.77 3.23 11.65 2.14 5.83 2.01 5.17 2.32 4.53 2.9 4.2l3.7-1.3Z" />,
     mail: <><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m4 7 8 6 8-6" /></>,
   };
-  return <svg className="footer-icon" viewBox="0 0 24 24" aria-hidden="true">{paths[name]}</svg>;
+ if (name === "whatsapp") {
+  return <img className="footer-icon" src={whatsappLogo} alt="WhatsApp" />;
+}
+
+return (
+  <svg className="footer-icon" viewBox="0 0 24 24" aria-hidden="true">
+    {paths[name]}
+  </svg>
+);
 }
 
 function SectionHeading({ children }) {
