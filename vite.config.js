@@ -10,4 +10,8 @@ export default defineConfig({
     babel({ presets: [reactCompilerPreset()] }),
     tailwindcss(),
   ],
+  assetsInclude: ['**/*.glb'],
+  server: {
+    allowedHosts: ['.ngrok-free.dev', '.ngrok-free.app'],
+  },
 })

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import "./WIE.css";
+import "./wie.css";
 
 import wieLogo from "./images/wie-logo.png";
 import slide1 from "./images/slide1.jpg";

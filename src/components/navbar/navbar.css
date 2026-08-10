@@ -13,9 +13,29 @@
 
     z-index: 1000;
 
+    /* Transparent on Home */
     background: transparent;
 
     font-family: "Inter", sans-serif;
+
+    transition:
+        background 0.4s ease,
+        backdrop-filter 0.4s ease,
+        box-shadow 0.4s ease,
+        border-color 0.4s ease;
+}
+
+.ieee-navbar.scrolled {
+    background: rgba(6, 35, 60, 0.35);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(0, 181, 226, 0.18);
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .ieee-navbar-container {
@@ -39,7 +59,16 @@
     cursor: pointer;
 
     flex-shrink: 0;
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-end;
 }
+
+.wielogo {
+    width: 53px;
+    padding-bottom: 8px;
+}
+    
 
 img {
     width: 190px;

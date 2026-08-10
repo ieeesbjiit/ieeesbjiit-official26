@@ -1,40 +1,8 @@
-import { useEffect, useRef } from 'react'
 import ieeelogo from './logo.webm'
 import Terminal from './Terminal';
 import landingVideo from './underwater.mp4'
 
-
 const Landing = () => {
-  // const landingRef = useRef(null)
-
-  // useEffect(() => {
-  //   let animationFrame
-
-  //   const updateParallax = () => {
-  //     const landing = landingRef.current
-  //     if (!landing) return
-
-  //     const { top, height } = landing.getBoundingClientRect()
-  //     const progress = Math.max(-1, Math.min(1, -top / height))
-  //     landing.style.setProperty('--video-parallax-offset', `${progress * 12}%`)
-  //     animationFrame = undefined
-  //   }
-
-  //   const onScroll = () => {
-  //     if (!animationFrame) animationFrame = requestAnimationFrame(updateParallax)
-  //   }
-
-  //   updateParallax()
-  //   window.addEventListener('scroll', onScroll, { passive: true })
-  //   window.addEventListener('resize', onScroll)
-
-  //   return () => {
-  //     window.removeEventListener('scroll', onScroll)
-  //     window.removeEventListener('resize', onScroll)
-  //     if (animationFrame) cancelAnimationFrame(animationFrame)
-  //   }
-  // }, [])
-
   return (
     <>
       <div id = "home" className='landing'>
@@ -71,10 +39,13 @@ const Landing = () => {
           <span>Advancing Technology for <em>Humanity</em></span>
         </div>
       </div>
+      <div className="landingRight">
         <video className="ieeevideo" autoPlay muted loop playsInline>
           <source src={ieeelogo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+        {/* <img src={WIElogo} alt="IEEE Women in Engineering" /> */}
+      </div>
         
       </div>
 

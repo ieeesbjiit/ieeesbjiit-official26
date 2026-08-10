@@ -1,9 +1,7 @@
-import React from 'react'
+import StackedDeckGallery from '../StackedDeckGallery';
 
-const gallery = () => {
-  return (
-    <div id ="gallery">gallery</div>
-  )
+function Gallery() {
+  return <StackedDeckGallery />;
 }
 
-export default gallery
+export default Gallery;

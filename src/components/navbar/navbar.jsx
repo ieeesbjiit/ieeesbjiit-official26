@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./navbar.css";
 import logo from "../../assets/ieee_white.png";
+import WIElogo from '../../components/WIE/images/wie-logo.png'
 
 const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -12,6 +13,7 @@ const Navbar = () => {
         "highlights",
         "about",
         "events",
+        "wie",   
         "team",
         "gallery",
         "contact",
@@ -50,10 +52,11 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
 }, []);
     return (
-        <nav className="ieee-navbar">
+        <nav className={`ieee-navbar ${activeSection !== "home" ? "scrolled" : ""}`}>
             <div className="ieee-navbar-container">
 
                 <div className="ieee-logo">
+                    <img className="wielogo" src={WIElogo} alt="logo" />
                     <img src={logo} alt="logo" />
                 </div>
 
