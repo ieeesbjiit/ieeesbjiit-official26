@@ -74,7 +74,7 @@
   flex-direction: row;
   align-items: center;
   width: 100%;
-  gap: 150px;
+  gap: clamp(24px, 8vw, 150px);
   margin: 0 0 24px 0;
 }
 
@@ -157,18 +157,18 @@
 
 .wie-section .wie-heading {
   font-family: "Playfair Display", "Times New Roman", Times, serif;
-  font-size: 75px;
+  font-size: clamp(14px, 4vw, 75px);
   font-weight: 900;
-  line-height: 1.1;
+  line-height: 1.15;
   color: #ffffff;
   letter-spacing: 0.01em;
   margin-bottom: 8px;
   white-space: nowrap;
   text-shadow:
-    0 0 8px rgba(200, 150, 255, 0.9),
-    0 0 20px rgba(180, 100, 255, 0.7),
-    0 0 45px rgba(150, 60, 255, 0.5),
-    0 0 80px rgba(120, 40, 220, 0.3);
+    0 0 8px rgba(100, 180, 255, 0.9),
+    0 0 20px rgba(60, 150, 255, 0.7),
+    0 0 45px rgba(30, 120, 255, 0.5),
+    0 0 80px rgba(20, 80, 220, 0.3);
 }
 
 .wie-section .wie-paragraph {
@@ -425,11 +425,7 @@
 /* ─── Large tablets / small desktops ─── */
 @media (max-width: 1200px) {
   .wie-section .wie-title-row {
-    gap: 60px;
-  }
-
-  .wie-section .wie-heading {
-    font-size: 52px;
+    gap: clamp(20px, 5vw, 60px);
   }
 
   .wie-section .wie-carousel-wrap {
@@ -464,8 +460,6 @@
   }
 
   .wie-section .wie-heading {
-    font-size: 46px;
-    white-space: normal;
     text-align: center;
   }
 
@@ -528,9 +522,7 @@
     width: 120px;
   }
 
-  .wie-section .wie-heading {
-    font-size: 38px;
-  }
+  /* heading font-size handled by clamp() — no override needed */
 
   .wie-section .wie-paragraph {
     font-size: 16px;
@@ -571,10 +563,7 @@
     width: 100px;
   }
 
-  .wie-section .wie-heading {
-    font-size: 28px;
-    letter-spacing: 0.01em;
-  }
+  /* heading font-size handled by clamp() — no override needed */
 
   .wie-section .wie-tagline {
     font-size: 16px;
