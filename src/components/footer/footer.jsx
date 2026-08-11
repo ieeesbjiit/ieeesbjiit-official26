@@ -2,6 +2,7 @@ import './Footer.css';
 import oceanFloor from './assets/ocean-floor.png';
 import ieeeLogo from '../../assets/ieee_white.png';
 import whatsappLogo from "./assets/whatsapp-svgrepo-com.svg";
+import WIElogo from '../../components/WIE/images/wie-logo.png'
 /* The first four links come from the public IEEE SB JIIT website. */
 const socialLinks = [
   { label: 'Instagram', href: 'https://www.instagram.com/ieeesbjiit/', icon: 'instagram' },
@@ -77,8 +78,11 @@ export default function Footer() {
       </div>
 
       <div className="footer-content">
-        <section className="footer-brand" aria-label="IEEE Student Branch JIIT">
-          <img src={ieeeLogo} alt="IEEE Student Branch JIIT" />
+        <section className="" aria-label="IEEE Student Branch JIIT">
+          <div className="ieee-logo">
+            <img className="wielogo" src={WIElogo} alt="logo" />
+            <img src={ieeeLogo} alt="logo" />
+          </div>
         </section>
 
         <section className="footer-contacts" aria-labelledby="contact-heading">
