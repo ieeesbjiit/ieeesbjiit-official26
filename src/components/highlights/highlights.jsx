@@ -434,7 +434,7 @@ export default function FlipStatCards() {
           .card-grid {
             grid-template-columns: 1fr;
             gap: 16px;
-            max-width: 340px;
+            max-width: 300px;
           }
           .flip-card {
             height: 240px;

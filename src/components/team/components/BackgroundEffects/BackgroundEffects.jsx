@@ -4,8 +4,8 @@ import './BackgroundEffects.css';
 function BackgroundEffects() {
   return (
     <>
-      <div className="bg-effects__shimmer" />
-      <div className="bg-effects__dots" />
+      {/* <div className="bg-effects__shimmer" />
+      <div className="bg-effects__dots" /> */}
     </>
   );
 }
