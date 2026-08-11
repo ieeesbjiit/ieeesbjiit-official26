@@ -64,33 +64,9 @@
   text-transform: uppercase;
   margin: 0 auto;
   text-align: center;
-
-  background: linear-gradient(
-    100deg,
-    var(--text-muted) 0%,
-    var(--text) 22%,
-    #ffffff 40%,
-    var(--text) 58%,
-    var(--text-muted) 80%,
-    var(--text-muted) 100%
-  );
-  background-size: 240% 100%;
-  background-position: 100% 0;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: deck-shimmer 7s ease-in-out infinite;
+  color: var(--text);
 }
 
-@media (prefers-reduced-motion: reduce){
-  .masthead-title{ animation: none; background-position: 40% 0; }
-}
-
-@keyframes deck-shimmer{
-  0%   { background-position: 120% 0; }
-  50%  { background-position: -20% 0; }
-  100% { background-position: 120% 0; }
-}
 
 .masthead-count{
   font-family: var(--mono);
