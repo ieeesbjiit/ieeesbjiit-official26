@@ -16,7 +16,7 @@ const META = {
 const defaultPhotos = images.map((image) => ({
   id: image.id,
   src: image.src,
-  title: META[image.id]?.title ?? image.alt,
+  title: META[image.id]?.title ?? "",
   meta: META[image.id]?.meta ?? "",
 }));
 
@@ -194,12 +194,10 @@ function StackedDeckGallery({ photos = defaultPhotos }) {
       <div className="masthead">
         <div className="masthead-top">
           <div>
-            <p className="masthead-eyebrow">IEEE Student Chapter</p>
+           
             <h1 className="masthead-title">Gallery</h1>
           </div>
-          <p className="masthead-count">
-            {String(activeIndex + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
-          </p>
+          
         </div>
         {/* <div className="masthead-rule" /> */}
       </div>

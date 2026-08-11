@@ -17,7 +17,6 @@
   color: var(--text);
   font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
 }
-
 .deck-gallery-wrap *{ box-sizing: border-box; }
 
 .deck-gallery-wrap::before {
@@ -38,10 +37,11 @@
   margin-bottom: 56px;
 }
 
-.masthead-top{
+.masthead-top {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   gap: 24px;
   flex-wrap: wrap;
 }
@@ -55,40 +55,18 @@
   margin: 0 0 6px;
 }
 
-.masthead-title{
+.masthead-title {
   font-family: var(--serif);
   font-weight: 900;
-  font-size: clamp(56px, 9vw, 108px);
-  line-height: 0.88;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1;
   letter-spacing: -0.02em;
   text-transform: uppercase;
-  margin: 0;
-  background: linear-gradient(
-    100deg,
-    var(--text-muted) 0%,
-    var(--text) 22%,
-    #ffffff 40%,
-    var(--text) 58%,
-    var(--text-muted) 80%,
-    var(--text-muted) 100%
-  );
-  background-size: 240% 100%;
-  background-position: 100% 0;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: deck-shimmer 7s ease-in-out infinite;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--text);
 }
 
-@media (prefers-reduced-motion: reduce){
-  .masthead-title{ animation: none; background-position: 40% 0; }
-}
-
-@keyframes deck-shimmer{
-  0%   { background-position: 120% 0; }
-  50%  { background-position: -20% 0; }
-  100% { background-position: 120% 0; }
-}
 
 .masthead-count{
   font-family: var(--mono);
@@ -99,10 +77,8 @@
   font-variant-numeric: tabular-nums;
 }
 
-.masthead-rule{
-  margin-top: 20px;
-  height: 1px;
-  background: linear-gradient(90deg, var(--border) 0%, var(--border) 70%, transparent 100%);
+.masthead-rule {
+  display: none;
 }
 
 /* ---------- Layout ---------- */
