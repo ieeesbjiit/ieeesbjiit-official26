@@ -27,7 +27,7 @@ const developers = [
   { name: 'Avlika Rawat', href: 'https://www.linkedin.com/in/avlika-rawat-09751a341/' },
   { name: 'Esha Jindal', href: 'https://www.linkedin.com/in/esha-jindal-61851a3aa/' },
   { name: 'Harsh Kumar Bihani', href: 'https://www.linkedin.com/in/harsh-kumar-bihani-a32a19374/' },
-  { name: 'Ishita', href:'https://www.linkedin.com/in/ishita-singh-1b533b38b/'},
+  { name: 'Ishita Singh', href:'https://www.linkedin.com/in/ishita-singh-1b533b38b/'},
   { name: 'Janmejai Pandey', href: 'https://www.linkedin.com/in/janmejai-pandey-050b56387' },
   { name: 'Pragya Ahlawat', href: 'https://www.linkedin.com/in/pragya-ahlawat/' },
   { name: 'Rushil Koul', href: 'https://www.linkedin.com/in/rushilkoul/' },
