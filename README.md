@@ -13,7 +13,7 @@
 5. About: Harsh
 6. Events Section: Kratika, Esha
 7. WIE Section: Ishita
-8. Team: Janmejai, Shreshtha
+8. Team: Janmejai
 9. Gallery: Pragya, Vidhaan
 10. Footer: Manushree
 
