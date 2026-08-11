@@ -43,7 +43,7 @@ div.landing {
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-family: 'Inter', sans-serif;
     font-weight: 800;
-    max-width: 18ch;
+    max-width: 28ch;
 }
 
 .landingLeft > .subtitle {
@@ -114,7 +114,7 @@ div.landing {
 
 @media (max-width: 1350px) {
     .landingLeft > .title {
-        max-width: 12ch;
+        max-width: 24ch;
     }
 }
 
