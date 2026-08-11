@@ -16,7 +16,7 @@
     /* Transparent on Home */
     background: transparent;
 
-    font-family: "Inter", sans-serif;
+    font-family: system-ui , sans-serif;
 
     transition:
         background 0.4s ease,
