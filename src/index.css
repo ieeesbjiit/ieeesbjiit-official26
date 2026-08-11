@@ -8,3 +8,9 @@ body{
 *{
     font-family: system-ui, sans-serif !important;
 }
+
+@media (max-width: 500px) {
+  body {
+    background-position: left center;
+  }
+}
