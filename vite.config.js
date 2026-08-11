@@ -12,6 +12,6 @@ export default defineConfig({
   ],
   assetsInclude: ['**/*.glb'],
   server: {
-    allowedHosts: ['.ngrok-free.dev', '.ngrok-free.app'],
+    allowedHosts: ['.ngrok-free.dev', '.ngrok-free.app', '.trycloudflare.com'],
   },
 })

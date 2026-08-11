@@ -85,15 +85,60 @@ function useCountUp(target, duration = 1800) {
  
 function FlipCard({ stat, floatDelay, floatDuration }) {
   const [flipped, setFlipped] = useState(false);
-  const [count, ref] = useCountUp(stat.number);
+  const [count, countRef] = useCountUp(stat.number);
   const { Icon } = stat;
- 
-  const handleEnter = () => setFlipped(true);
-  const handleLeave = () => setFlipped(false);
-  const handleTap = () => setFlipped((f) => !f);
- 
+
+  // Separate ref for the flip-card DOM node (needed for native touch listener)
+  const cardRef = useRef(null);
+
+  // Track whether the last interaction was a touch so the synthetic
+  // click that follows touchend doesn't double-toggle the card.
+  const touchRef = useRef(false);
+
+  // Register a NON-PASSIVE native touchstart listener so we can call
+  // e.preventDefault() and suppress the synthetic click that follows.
+  useEffect(() => {
+    const card = cardRef.current;
+    if (!card) return;
+
+    function onTouchStart(e) {
+      touchRef.current = true;
+      e.preventDefault(); // stop the subsequent click from also firing
+      setFlipped((f) => !f);
+      setTimeout(() => { touchRef.current = false; }, 500);
+    }
+
+    card.addEventListener("touchstart", onTouchStart, { passive: false });
+    return () => card.removeEventListener("touchstart", onTouchStart);
+  }, []);
+
+  const handleMouseEnter = () => {
+    if (touchRef.current) return;
+    setFlipped(true);
+  };
+  const handleMouseLeave = () => {
+    if (touchRef.current) return;
+    setFlipped(false);
+  };
+
+  // onClick handles keyboard / assistive-tech activation only
+  const handleClick = () => {
+    if (touchRef.current) return;
+    setFlipped((f) => !f);
+  };
+
+  // Merge the countRef (IntersectionObserver) with the cardRef
+  const mergedRef = (node) => {
+    cardRef.current = node;
+    if (typeof countRef === "function") {
+      countRef(node);
+    } else if (countRef) {
+      countRef.current = node;
+    }
+  };
+
   return (
-    <div  
+    <div
       className="float-wrapper highlights"
       style={{
         animationDelay: `${floatDelay}s`,
@@ -102,20 +147,22 @@ function FlipCard({ stat, floatDelay, floatDuration }) {
     >
       <div
         className="flip-card"
-        ref={ref}
-        onMouseEnter={handleEnter}
-        onMouseLeave={handleLeave}
-        onClick={handleTap}
-        onTouchStart={handleTap}
+        ref={mergedRef}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onClick={handleClick}
+        role="button"
+        tabIndex={0}
+        aria-pressed={flipped}
+        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") handleClick(); }}
       >
-
         <div
           className="glow-orb"
           style={{ background: stat.glow, animationDelay: `${floatDelay}s` }}
         />
- 
+
         <div className={`flip-card-inner ${flipped ? "is-flipped" : ""}`}>
-        
+
           <div
             className="flip-face flip-front"
             style={{
@@ -135,8 +182,7 @@ function FlipCard({ stat, floatDelay, floatDuration }) {
             </div>
             <div className="label">{stat.label}</div>
           </div>
- 
-          
+
           <div
             className="flip-face flip-back"
             style={{
@@ -168,7 +214,6 @@ export default function FlipStatCards() {
  
         .section-wrap {
           min-height: 100vh;
-          // background: linear-gradient(160deg, var(--navy-950) 0%, var(--navy-800) 45%, var(--blue-700) 100%);
           padding: 90px 24px;
           display: flex;
           flex-direction: column;
@@ -316,7 +361,7 @@ export default function FlipStatCards() {
             color: #fff;
             font-weight: 800;
             width: 100%;
-            font-size: clamp(32px, 5vw, 56px);
+            font-size: clamp(24px, 5vw, 56px);
             text-align: center;
             margin-bottom: 56px;
             letter-spacing: 0.5px;
@@ -334,6 +379,82 @@ export default function FlipStatCards() {
 
         @media (prefers-reduced-motion: reduce) {
             .section-heading { animation: none; }
+        }
+
+        /* ── Large tablets ── */
+        @media (max-width: 1024px) {
+          .section-wrap {
+            padding: 80px 20px;
+          }
+          .card-grid {
+            gap: 28px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          }
+          .flip-card {
+            height: 290px;
+          }
+          .number {
+            font-size: 36px;
+          }
+          .section-heading {
+            margin-bottom: 40px;
+          }
+        }
+
+        /* ── Tablets (2-column) ── */
+        @media (max-width: 768px) {
+          .section-wrap {
+            padding: 70px 16px;
+          }
+          .card-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 520px;
+          }
+          .flip-card {
+            height: 260px;
+          }
+          .number {
+            font-size: 32px;
+          }
+          .label {
+            font-size: 13px;
+            padding: 0 12px;
+          }
+          .section-heading {
+            margin-bottom: 32px;
+          }
+        }
+
+        /* ── Small phones (1-column) ── */
+        @media (max-width: 480px) {
+          .section-wrap {
+            padding: 60px 12px;
+          }
+          .card-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+            max-width: 340px;
+          }
+          .flip-card {
+            height: 240px;
+          }
+          .number {
+            font-size: 36px;
+          }
+          .label {
+            font-size: 14px;
+          }
+          .section-heading {
+            margin-bottom: 28px;
+          }
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+          /* On touch screens, show a pressed ring on active state */
+          .flip-card:active .flip-front {
+            border-color: rgba(20, 119, 214, 0.7);
+          }
         }
 
       `}</style>
