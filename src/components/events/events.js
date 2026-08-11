@@ -48,7 +48,7 @@ const events = [
 
   {
     id: 5,
-    title: "TECH BLOCKS",
+    title: "TECHBLOCKS",
     description:
       "Focused technical sessions exploring cutting-edge technologies and engineering concepts.",
     accent: "#F97316",

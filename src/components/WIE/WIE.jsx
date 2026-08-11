@@ -10,25 +10,44 @@ import slide5 from "./images/slide5.jpg";
 
 const FACE_COUNT = 5;
 const ANGLE_STEP = 360 / FACE_COUNT;
-const ROTATE_EVERY = 3600;
 const BASELINE_WIDTH = 220; 
 
 const SLIDES = [
-  { src: slide1 },
-  { src: slide2 },
-  { src: slide3 },
-  { src: slide4 },
-  { src: slide5 },
+  { src: slide1, alt: "IEEE WIE members group photo at an evening event" },
+  {
+    src: slide2,
+    alt: "WIE Lumina speaker presenting a 5-step problem solving process to the audience",
+  },
+  {
+    src: slide3,
+    alt: "WIE Lumina speaker presenting a problem solving checklist to a full auditorium",
+  },
+  { src: slide4, alt: "WIE Lumina Decoding DSA session group photo on stage" },
+  {
+    src: slide5,
+    alt: "WIE hydroponics and embedded systems project exhibition with live dashboard",
+  },
 ];
+
+
+const TAGLINE_WORDS = ["Achieve . . .", "Empower . . .", "Inspire . . ."];
+const TAGLINE_TYPE_MS = 110;
+const TAGLINE_DELETE_MS = 60;
+const TAGLINE_HOLD_MS = 1500;
+const TAGLINE_PAUSE_MS = 250;
 
 function WIE() {
   const stageRef = useRef(null);
-  const autoplayTimerRef = useRef(null);
 
-  const [carousel, setCarousel] = useState({ currentIndex: 0, cumulativeAngle: 0 });
+  
+  const [carousel, setCarousel] = useState({ currentIndex: 3, cumulativeAngle: -216 });
 
- 
+  
   const [geometry, setGeometry] = useState({ radius: 0, perspective: 0, scale: 1 });
+
+  const [taglineText, setTaglineText] = useState("");
+  const [taglineWordIndex, setTaglineWordIndex] = useState(0);
+  const [taglinePhase, setTaglinePhase] = useState("typing");
 
   const goToNext = useCallback(() => {
     setCarousel((prev) => ({
@@ -50,17 +69,15 @@ function WIE() {
   const handleDotClick = useCallback(
     (index) => {
       goToIndex(index);
-
-     
-      clearInterval(autoplayTimerRef.current);
-      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (!reducedMotion) {
-        autoplayTimerRef.current = setInterval(goToNext, ROTATE_EVERY);
-      }
     },
-    [goToIndex, goToNext]
+    [goToIndex]
   );
 
+  const handleStageClick = useCallback(() => {
+    goToNext();
+  }, [goToNext]);
+
+  
   useEffect(() => {
     const stage = stageRef.current;
     if (!stage) return;
@@ -92,6 +109,42 @@ function WIE() {
     };
   }, []);
 
+  
+  useEffect(() => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion) {
+      setTaglineText(TAGLINE_WORDS[0]);
+      return;
+    }
+
+    const currentWord = TAGLINE_WORDS[taglineWordIndex];
+    const isTyping = taglinePhase === "typing";
+    const delay = isTyping
+      ? taglineText.length < currentWord.length
+        ? TAGLINE_TYPE_MS
+        : TAGLINE_HOLD_MS
+      : taglineText.length > 0
+      ? TAGLINE_DELETE_MS
+      : TAGLINE_PAUSE_MS;
+
+    const timeout = setTimeout(() => {
+      if (isTyping) {
+        if (taglineText.length < currentWord.length) {
+          setTaglineText(currentWord.slice(0, taglineText.length + 1));
+        } else {
+          setTaglinePhase("deleting");
+        }
+      } else if (taglineText.length > 0) {
+        setTaglineText(currentWord.slice(0, taglineText.length - 1));
+      } else {
+        setTaglineWordIndex((prev) => (prev + 1) % TAGLINE_WORDS.length);
+        setTaglinePhase("typing");
+      }
+    }, delay);
+
+    return () => clearTimeout(timeout);
+  }, [taglineText, taglinePhase, taglineWordIndex]);
+
   useEffect(() => {
     const stage = stageRef.current;
     if (!stage) return;
@@ -99,17 +152,10 @@ function WIE() {
     const isPointerFine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    function startAutoplay() {
-      if (reducedMotion) return;
-      autoplayTimerRef.current = setInterval(goToNext, ROTATE_EVERY);
-    }
 
-    function stopAutoplay() {
-      clearInterval(autoplayTimerRef.current);
-    }
-
- 
+    const HOVER_SCALE = 1.035;
     let rafPending = false;
+
     function handleMouseMove(e) {
       if (rafPending) return;
       rafPending = true;
@@ -118,25 +164,20 @@ function WIE() {
         const px = (e.clientX - rect.left) / rect.width - 0.5;
         const py = (e.clientY - rect.top) / rect.height - 0.5;
         const maxTilt = 6;
-        stage.style.transform = `rotateX(${-py * maxTilt}deg) rotateY(${px * maxTilt}deg)`;
+        stage.style.transform = `rotateX(${-py * maxTilt}deg) rotateY(${px * maxTilt}deg) scale(${HOVER_SCALE})`;
         rafPending = false;
       });
     }
 
-    function resetTilt() {
-      stage.style.transform = "rotateX(0deg) rotateY(0deg)";
-    }
-
     function handleMouseEnter() {
-      stopAutoplay();
+      stage.style.transform = `rotateX(0deg) rotateY(0deg) scale(${HOVER_SCALE})`;
     }
 
     function handleMouseLeave() {
-      resetTilt();
-      startAutoplay();
+      stage.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
     }
 
-    startAutoplay();
+    // autoplay disabled — manual navigation only
 
     if (isPointerFine && !reducedMotion) {
       stage.addEventListener("mousemove", handleMouseMove);
@@ -145,7 +186,6 @@ function WIE() {
     }
 
     return () => {
-      stopAutoplay();
       if (isPointerFine && !reducedMotion) {
         stage.removeEventListener("mousemove", handleMouseMove);
         stage.removeEventListener("mouseenter", handleMouseEnter);
@@ -158,8 +198,18 @@ function WIE() {
     <section id="wie" className="wie-section">
       <div className="wie-card">
         <div className="wie-content">
-          <img className="wie-logo" src={wieLogo} alt="IEEE Women in Engineering Logo" />
-          <div className="wie-heading">Women in Engineering</div>
+          <div className="wie-title-row">
+            <div className="wie-logo-wrap">
+              <img className="wie-logo" src={wieLogo} alt="IEEE Women in Engineering Logo" />
+            </div>
+            <div className="wie-heading-group">
+              <div className="wie-heading">Women in Engineering</div>
+              <div className="wie-tagline" aria-hidden="true">
+                <span className="wie-tagline-word">{taglineText}</span>
+                <span className="wie-tagline-caret" />
+              </div>
+            </div>
+          </div>
           <div className="wie-paragraph">
             The Women in Engineering (WIE) Affinity Group at IEEE SB JIIT is dedicated to
             promoting the involvement and success of women in engineering and technology.
@@ -179,9 +229,13 @@ function WIE() {
           <div
             className="wie-stage"
             ref={stageRef}
+            onClick={handleStageClick}
+            role="button"
+            aria-label="Next photo"
             style={{
               perspective: `${geometry.perspective}px`,
               "--car-scale": geometry.scale,
+              cursor: "pointer",
             }}
           >
             <div
@@ -203,7 +257,6 @@ function WIE() {
               ))}
             </div>
           </div>
-
           <div className="wie-dots">
             {SLIDES.map((slide, i) => (
               <button
@@ -222,3 +275,6 @@ function WIE() {
 }
 
 export default WIE;
+
+
+

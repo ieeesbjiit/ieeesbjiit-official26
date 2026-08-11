@@ -168,7 +168,7 @@ export default function FlipStatCards() {
  
         .section-wrap {
           min-height: 100vh;
-          background: linear-gradient(160deg, var(--navy-950) 0%, var(--navy-800) 45%, var(--blue-700) 100%);
+          // background: linear-gradient(160deg, var(--navy-950) 0%, var(--navy-800) 45%, var(--blue-700) 100%);
           padding: 90px 24px;
           display: flex;
           flex-direction: column;

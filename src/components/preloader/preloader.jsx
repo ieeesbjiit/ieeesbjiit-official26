@@ -23,11 +23,8 @@ const ORBIT_RADIUS_WORLD = ORBIT_RADIUS_CAMERA_CALIBRATION * 0.75;
 const TARGET_HALF_HEIGHT_FRACTION = 0.7237;
 const CAMERA_FOV_DEG = 32;
 
-const MIN_DISPLAY_TIME_MS = 5000;
-
-// Weight distribution for progress bar
-const WEIGHT_MODEL = 0.2;    // 20% — model loads first
-const WEIGHT_MEDIA = 0.8;    // 80% — rest is media
+// Minimum circles the fish must complete before preloader can end
+const MIN_CIRCLES = 2;
 
 function Preloader({ onComplete }) {
   const canvasWrapRef = useRef(null);
@@ -39,22 +36,23 @@ function Preloader({ onComplete }) {
     const wrap = canvasWrapRef.current;
     if (!wrap) return;
 
-    const startTime = Date.now();
     let rafId;
     let disposed = false;
 
     // ---------- Progress state ----------
-    let modelProgress = 0;
-    let mediaProgress = 0;
     let modelDone = false;
     let mediaDone = false;
+    let modelLoadedTime = null;
+    let allLoadedTime = null;
+    let completed = false; // Once true, bar stays locked at 100%
 
-    const updateProgress = () => {
-      const combined = Math.round(
-        modelProgress * WEIGHT_MODEL + mediaProgress * WEIGHT_MEDIA
-      );
-      const capped = modelDone && mediaDone ? 100 : Math.min(99, combined);
-      if (percentRef.current) percentRef.current.textContent = capped + '%';
+    let rawModelProgress = 0;
+    let rawMediaProgress = 0;
+
+    const updateProgressDisplay = (percent) => {
+      const capped = Math.min(100, Math.max(0, percent));
+      const rounded = Math.round(capped);
+      if (percentRef.current) percentRef.current.textContent = rounded + '%';
       if (fillRef.current) fillRef.current.style.width = capped + '%';
     };
 
@@ -147,32 +145,16 @@ function Preloader({ onComplete }) {
     // ---------- Model loading manager ----------
     const manager = new THREE.LoadingManager();
     manager.onProgress = (url, loaded, total) => {
-      modelProgress = Math.min(100, Math.round((loaded / total) * 100));
-      updateProgress();
+      rawModelProgress = Math.min(100, (loaded / total) * 100);
     };
 
-    // ---------- Safety net — cap at 15s ----------
-    const safetyTimer = setTimeout(() => {
-      modelDone = true;
-      mediaDone = true;
-      modelProgress = 100;
-      mediaProgress = 100;
-      updateProgress();
-      checkComplete();
-    }, 15000);
+    // ---------- Clock ----------
+    const clock = new THREE.Clock();
 
-    // ---------- Completion check ----------
-    const checkComplete = () => {
-      if (!modelDone || !mediaDone) return;
-      const elapsed = Date.now() - startTime;
-      const remaining = Math.max(0, MIN_DISPLAY_TIME_MS - elapsed);
-      setTimeout(() => {
-        if (disposed) return;
-        setFadeOut(true);
-        setTimeout(() => {
-          if (onComplete) onComplete();
-        }, 600);
-      }, remaining);
+    const checkAllLoaded = () => {
+      if (modelDone && mediaDone && allLoadedTime === null) {
+        allLoadedTime = clock.getElapsedTime();
+      }
     };
 
     // ---------- Start media preload AFTER model finishes ----------
@@ -182,20 +164,17 @@ function Preloader({ onComplete }) {
 
       if (mediaSources.length === 0) {
         mediaDone = true;
-        mediaProgress = 100;
-        updateProgress();
-        checkComplete();
+        rawMediaProgress = 100;
+        checkAllLoaded();
         return;
       }
 
       preloadMedia(mediaSources, (percent) => {
-        mediaProgress = percent;
-        updateProgress();
+        rawMediaProgress = percent;
       }).then(() => {
         mediaDone = true;
-        mediaProgress = 100;
-        updateProgress();
-        checkComplete();
+        rawMediaProgress = 100;
+        checkAllLoaded();
       });
     };
 
@@ -298,33 +277,39 @@ function Preloader({ onComplete }) {
           }
 
           modelDone = true;
-          modelProgress = 100;
-          updateProgress();
+          rawModelProgress = 100;
+          modelLoadedTime = clock.getElapsedTime();
+          checkAllLoaded();
 
-          // ✅ Model finished — now start media preload
           startMediaPreload();
         } catch (setupErr) {
           console.error('Post-load setup error:', setupErr);
           modelDone = true;
-          modelProgress = 100;
-          updateProgress();
+          rawModelProgress = 100;
+          modelLoadedTime = clock.getElapsedTime();
+          checkAllLoaded();
           startMediaPreload();
         }
       },
       undefined,
       (err) => {
         console.error('Model failed to load:', err);
-        // Model failed — proceed to media anyway
         modelDone = true;
-        modelProgress = 100;
-        updateProgress();
+        rawModelProgress = 100;
+        modelLoadedTime = clock.getElapsedTime();
+        checkAllLoaded();
         startMediaPreload();
       }
     );
 
     // ---------- Animation loop ----------
-    const clock = new THREE.Clock();
     const EASE_AMOUNT = 0.06;
+
+    // Track fish's cumulative angle to detect real circle completion
+    let cumulativeAngle = 0;
+    let lastTheta = null;
+    let angleAtLoadComplete = null;
+    let angleTargetForFinish = null;
 
     function animate() {
       if (disposed) return;
@@ -332,6 +317,7 @@ function Preloader({ onComplete }) {
       const t = clock.getElapsedTime();
       const dt = clock.getDelta();
 
+      // ---------- Fish orbit ----------
       const eased_t =
         t + (EASE_AMOUNT / ORBIT_OMEGA) * Math.sin(t * ORBIT_OMEGA);
       const theta = ORBIT_PHASE0 + ORBIT_DIRECTION * ORBIT_OMEGA * eased_t;
@@ -340,6 +326,17 @@ function Preloader({ onComplete }) {
       const y = -ORBIT_RADIUS_WORLD * Math.sin(theta);
       swimmer.position.set(x, y, 0);
       swimmer.rotation.z = -(theta + ROLL_OFFSET) + MODEL_REST_ALIGNMENT;
+
+      // Track cumulative angle traveled (unwrapped, always increasing)
+      if (lastTheta === null) {
+        lastTheta = theta;
+      } else {
+        let delta = theta - lastTheta;
+        while (delta > Math.PI) delta -= 2 * Math.PI;
+        while (delta < -Math.PI) delta += 2 * Math.PI;
+        cumulativeAngle += Math.abs(delta);
+        lastTheta = theta;
+      }
 
       if (mixer) mixer.update(dt);
 
@@ -355,6 +352,58 @@ function Preloader({ onComplete }) {
 
       particles.rotation.y += dt * 0.02;
 
+      // ============================================
+      // PROGRESS BAR
+      // ============================================
+
+      let percent;
+
+      // If already completed — keep at 100% forever
+      if (completed) {
+        updateProgressDisplay(100);
+        composer.render();
+        return;
+      }
+
+      if (allLoadedTime !== null) {
+        // Setup: mark starting angle and target angle when loading finishes
+        if (angleAtLoadComplete === null) {
+          angleAtLoadComplete = cumulativeAngle;
+          const circlesSoFar = cumulativeAngle / (2 * Math.PI);
+          const circlesNeeded = Math.max(MIN_CIRCLES, Math.ceil(circlesSoFar));
+          angleTargetForFinish = circlesNeeded * 2 * Math.PI;
+        }
+
+        if (cumulativeAngle >= angleTargetForFinish) {
+          // Fish reached target — LOCK at 100% and fade
+          completed = true;
+          updateProgressDisplay(100);
+          setFadeOut(true);
+          setTimeout(() => {
+            if (!disposed && onComplete) onComplete();
+          }, 1200);
+          composer.render();
+          return;
+        }
+
+        // Progress ratio based on fish's actual angular travel
+        const angleFromLoad = cumulativeAngle - angleAtLoadComplete;
+        const totalAngleDuringFinish = angleTargetForFinish - angleAtLoadComplete;
+        const angleRatio = angleFromLoad / totalAngleDuringFinish;
+
+        const eased = 1 - Math.pow(1 - angleRatio, 3);
+        percent = eased * 98;
+      } else {
+        // ---- STILL LOADING ----
+        const realProgress = rawModelProgress * 0.2 + rawMediaProgress * 0.8;
+        const timeSinceStart = t;
+        const timeBasedProgress = Math.min(85, (timeSinceStart / 8) * 85);
+        percent = Math.min(realProgress, timeBasedProgress);
+        percent = Math.min(85, percent);
+      }
+
+      updateProgressDisplay(percent);
+
       composer.render();
     }
     animate();
@@ -363,7 +412,6 @@ function Preloader({ onComplete }) {
     return () => {
       disposed = true;
       cancelAnimationFrame(rafId);
-      clearTimeout(safetyTimer);
       window.removeEventListener('resize', resize);
 
       renderer.dispose();
@@ -390,7 +438,7 @@ function Preloader({ onComplete }) {
   return (
     <div className={`preloader ${fadeOut ? 'preloader--fade-out' : ''}`}>
       <div className="preloader__brandmark">
-        IEEE&nbsp;·&nbsp;JIIT&nbsp;STUDENT&nbsp;BRANCH
+        IEEE&nbsp;·&nbsp;STUDENT&nbsp;BRANCH&nbsp;JIIT
       </div>
 
       <div className="preloader__canvas-wrap" ref={canvasWrapRef} />

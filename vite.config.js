@@ -11,4 +11,7 @@ export default defineConfig({
     tailwindcss(),
   ],
   assetsInclude: ['**/*.glb'],
+  server: {
+    allowedHosts: ['.ngrok-free.dev', '.ngrok-free.app'],
+  },
 })

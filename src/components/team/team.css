@@ -2,14 +2,14 @@
   min-height: 100vh;
   width: 100%;
   display: block;
-  background: linear-gradient(
+  /* background: linear-gradient(
     160deg,
     #020c1b 0%,
     #041e38 30%,
     #062c4a 55%,
     #041e38 80%,
     #020c1b 100%
-  );
+  ); */
 }
 
 .team__content {

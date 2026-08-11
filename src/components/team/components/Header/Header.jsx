@@ -13,15 +13,7 @@ function Header() {
 
   return (
     <div ref={ref} className="header" style={revealStyle}>
-      <div className="header__badge">
-        <span className="header__badge-line header__badge-line--left" />
-        <span className="header__badge-text">IEEE Official Website 2026</span>
-        <span className="header__badge-line header__badge-line--right" />
-      </div>
       <h2 className="header__title">Meet the IEEE Core Team</h2>
-      <p className="header__subtitle">
-        The passionate individuals steering IEEE into the future.
-      </p>
     </div>
   );
 }

@@ -14,7 +14,7 @@
   position: relative;
   min-height: 100vh;
   width: 100%;
-  background-color: var(--ieee-navy);
+  /* background-color: var(--ieee-navy); */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -94,6 +94,7 @@
 */
 .header-wrapper {
   margin-bottom: 2.5rem;
+  text-align:center;
 }
 
 .header-title {
@@ -163,7 +164,7 @@
 .particle {
   position: absolute;
   border-radius: 50%;
-  background: var(--ieee-blue);
+  /* background: var(--ieee-blue); */
   filter: blur(60px);
   opacity: 0.15;
   animation: float linear infinite;
@@ -358,5 +359,113 @@
   &::after {
     right: 0;
     border-right-color: var(--border);
+  }
+}
+
+/* ===========================
+   RESPONSIVE - ABOUT SECTION
+=========================== */
+
+/* Tablet */
+@media (max-width: 1024px) {
+
+  .about-section {
+    min-height: auto;
+    padding: 5rem 1.5rem;
+  }
+
+  .about-container {
+    max-width: 900px;
+  }
+
+  .about-card {
+    padding: 3.5rem;
+    border-radius: 18px;
+  }
+
+  .header-wrapper {
+    margin-bottom: 2rem;
+  }
+
+  .header-title {
+    font-size: 2.5rem;
+  }
+
+  .header-divider {
+    margin-bottom: 2.5rem;
+  }
+
+  .about-paragraph {
+    font-size: 1.15rem;
+    line-height: 1.65;
+    max-width: 100%;
+  }
+}
+
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .about-section {
+    min-height: auto;
+    padding: 4rem 1rem;
+  }
+
+  .about-container {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .about-card {
+    padding: 2.2rem 1.5rem;
+    border-radius: 16px;
+  }
+
+  .header-wrapper {
+    margin-bottom: 1.7rem;
+  }
+
+  .header-title {
+    font-size: 2rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .header-divider {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .about-paragraph {
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 100%;
+  }
+}
+
+
+/* Small Mobile */
+@media (max-width: 480px) {
+
+  .about-section {
+    padding: 3rem 0.75rem;
+  }
+
+  .about-card {
+    padding: 1.8rem 1.2rem;
+    border-radius: 14px;
+  }
+
+  .header-title {
+    font-size: 1.65rem;
+  }
+
+  .header-divider {
+    margin-bottom: 1.5rem;
+  }
+
+  .about-paragraph {
+    font-size: 0.95rem;
+    line-height: 1.65;
   }
 }
