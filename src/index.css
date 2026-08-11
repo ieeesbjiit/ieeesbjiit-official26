@@ -3,4 +3,5 @@ body{
     background: url(/back.png) repeat-y;
     background-size: auto 100%;
     background-position: center;
+    font-family: system-ui, sans-serif !important;
 }
